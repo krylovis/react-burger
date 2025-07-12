@@ -5,3 +5,9 @@
   height: 100vh;
   background-color: #131316;
 }
+
+.appContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
