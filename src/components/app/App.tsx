@@ -1,11 +1,10 @@
 import style from './App.module.scss';
+import { AppHeader } from '../index';
 
-function App() {
+export default function App() {
   return (
     <div className={style.app}>
-      {/* React Burger */}
+      <AppHeader />
     </div>
   );
 }
-
-export default App;
