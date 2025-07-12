@@ -2,18 +2,36 @@ import { Logo, Button, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/r
 import style from './AppHeader.module.scss';
 import { Container } from '../index';
 
-export default function AppHeader() {
+
+interface IProps {
+  activeTab: string;
+  onSetActiveTab: (value: string) => void;
+}
+
+export default function AppHeader({ activeTab, onSetActiveTab }: IProps) {
   return (
     <div className={style.header}>
       <Container>
         <div className={style.header__container}>
           <nav className={style.header__nav}>
-            <Button extraClass={style.header__button} htmlType="button" type="secondary" size="medium">
-              <BurgerIcon type="secondary" />
+            <Button
+              extraClass={`${style.header__button}${activeTab === 'constructor' ? ` ${style.activeBtn}` : ''}`}
+              htmlType="button"
+              type="secondary"
+              size="medium"
+              onClick={() => onSetActiveTab('constructor')}
+            >
+              <BurgerIcon type={activeTab === 'constructor' ? 'primary' : 'secondary'} />
               Конструктор
             </Button>
-            <Button extraClass={style.header__button} htmlType="button" type="secondary" size="medium">
-              <ListIcon type="secondary" />
+            <Button
+              extraClass={`${style.header__button}${activeTab === 'orders-list' ? ` ${style.activeBtn}` : ''}`}
+              htmlType="button"
+              type="secondary"
+              size="medium"
+              onClick={() => onSetActiveTab('orders-list')}
+            >
+              <ListIcon type={activeTab === 'orders-list' ? 'primary' : 'secondary'} />
               Лента заказов
             </Button>
           </nav>
