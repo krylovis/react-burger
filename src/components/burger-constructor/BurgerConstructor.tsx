@@ -1,5 +1,6 @@
 import style from './BurgerConstructor.module.scss';
 import { useState } from 'react';
+import { IngredientsList } from '../index';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const TABS: Record<string, string> = {
@@ -8,7 +9,11 @@ const TABS: Record<string, string> = {
   main: 'Начинки',
 };
 
-export default function BurgerConstructor() {
+interface IProps {
+  ingredients: Record<string, string | number>[],
+}
+
+export default function BurgerConstructor({ ingredients }: IProps) {
   const [currentTab, setCurrentTab] = useState('bun');
 
   return (
@@ -18,12 +23,23 @@ export default function BurgerConstructor() {
       <div className={style.tabs}>
         {Object.keys(TABS).map((key) => (
           <Tab
+            key={key}
             value={key}
             active={currentTab === key}
             onClick={setCurrentTab}
           >
             {TABS[key]}
           </Tab>
+        ))}
+      </div>
+
+      <div className={style.listsContainer}>
+        {Object.keys(TABS).map((key) => (
+          <IngredientsList
+            key={key}
+            list={ingredients.filter(({ type }) => (type === key))}
+            title={TABS[key]}
+          />
         ))}
       </div>
     </div>

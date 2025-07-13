@@ -3,11 +3,14 @@
   box-sizing: border-box;
   padding: 40px;
   height: 100vh;
+  overflow: hidden;
   background-color: #131316;
 }
 
 .appContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  padding-bottom: 40px;
+  box-sizing: border-box;
   gap: 40px;
+  height: 100%;
 }

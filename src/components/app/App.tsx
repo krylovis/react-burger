@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import style from './App.module.scss';
 import { AppHeader, Container, BurgerConstructor } from '../index';
+import { data } from '../../utils/data';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('constructor');
@@ -16,7 +17,7 @@ export default function App() {
 
       <Container>
         <section className={style.appContainer}>
-          <BurgerConstructor />
+          <BurgerConstructor ingredients={data} />
         </section>
       </Container>
     </div>
