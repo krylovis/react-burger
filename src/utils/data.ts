@@ -1,4 +1,4 @@
-export const data = [
+const data = [
   {
      "_id":"60666c42cc7b410027a1a9b1",
      "name":"Краторная булка N-200i",
@@ -210,3 +210,27 @@ export const data = [
      "__v":0
   }
 ]
+
+type TProps = Record<string, string | number>[];
+ 
+const testItems = [
+   '60666c42cc7b410027a1a9b1',
+   '60666c42cc7b410027a1a9b9',
+   '60666c42cc7b410027a1a9bc',
+   '60666c42cc7b410027a1a9bb',
+   '60666c42cc7b410027a1a9bb',
+];
+
+function getItems(arr: TProps) {
+   const result: TProps = [];
+   for (const id of testItems) {
+      const item = arr.find(({_id}) => _id === id);
+      if (item) result.push(item);
+   }
+
+   return result;
+}
+
+const selectedData = getItems(data);
+
+export { data, selectedData };
