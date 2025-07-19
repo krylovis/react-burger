@@ -1,12 +1,15 @@
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './IngredientDetails.module.scss';
-import { DetailsItem } from '../index';
+import { DetailsItem, Modal } from '../index';
+import useModalState from '../../hooks/useModalState';
 
 interface IProps {
   ingredients: Record<string, string | number>[],
 }
 
 export default function IngredientDetails({ ingredients }: IProps) {
+  const { isModalOpen, toggleModalState, handleCloseModal } = useModalState();
+
   const { container, orderContainer, list } = style;
   const bun = ingredients.find(({ type }) => type === 'bun');
   const total = ingredients.reduce((sum, { price }) => sum + (price as number), 0);
@@ -29,10 +32,12 @@ export default function IngredientDetails({ ingredients }: IProps) {
           <CurrencyIcon type="primary" />
         </div>
 
-        <Button htmlType="button" type="primary" size="medium">
+        <Button htmlType="button" type="primary" size="medium" onClick={toggleModalState}>
           Оформить заказ
         </Button>
       </div>
+
+      {isModalOpen && <Modal closeModal={handleCloseModal}>123</Modal>}
     </div>
   );
 }
