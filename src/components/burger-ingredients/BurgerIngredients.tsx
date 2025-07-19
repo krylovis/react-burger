@@ -1,32 +1,47 @@
 import style from './BurgerIngredients.module.scss';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useState } from 'react';
+import { IngredientsList } from '../index';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+
+const TABS: Record<string, string> = {
+  bun: 'Булки',
+  sauce: 'Соусы',
+  main: 'Начинки',
+};
 
 interface IProps {
-  list: Record<string, string | number>[],
-  title: string,
+  ingredients: Record<string, string | number>[],
 }
 
-export default function BurgerIngredients({ list, title }: IProps) {
+export default function BurgerIngredients({ ingredients }: IProps) {
+  const [currentTab, setCurrentTab] = useState('bun');
+
   return (
-    <div className={style.container}>
-      <h2 className={style.title}>{title}</h2>
+    <div className={style.burgerIngredients}>
+      <h1 className={style.title}>Соберите бургер</h1>
 
-      <ul className={style.list}>
-        {list.map(({ _id, image, price, name }) => (
-          <li
-            key={_id}
-            className={style.item}
+      <div className={style.tabs}>
+        {Object.keys(TABS).map((key) => (
+          <Tab
+            key={key}
+            value={key}
+            active={currentTab === key}
+            onClick={setCurrentTab}
           >
-            <img src={image as string} alt="img" className={style.image} />
-            <div className={style.price}>
-              {price}
-              <CurrencyIcon type="primary" />
-            </div>
-
-            <p className={style.name}>{name}</p>
-          </li>
+            {TABS[key]}
+          </Tab>
         ))}
-      </ul>
+      </div>
+
+      <div className={style.listsContainer}>
+        {Object.keys(TABS).map((key) => (
+          <IngredientsList
+            key={key}
+            list={ingredients.filter(({ type }) => (type === key))}
+            title={TABS[key]}
+          />
+        ))}
+      </div>
     </div>
   );
 }

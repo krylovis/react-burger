@@ -1,47 +1,43 @@
+import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './BurgerConstructor.module.scss';
-import { useState } from 'react';
-import { BurgerIngredients } from '../index';
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-
-const TABS: Record<string, string> = {
-  bun: 'Булки',
-  sauce: 'Соусы',
-  main: 'Начинки',
-};
+import { DetailsItem, Modal } from '../index';
+import useModalState from '../../hooks/useModalState';
 
 interface IProps {
   ingredients: Record<string, string | number>[],
 }
 
 export default function BurgerConstructor({ ingredients }: IProps) {
-  const [currentTab, setCurrentTab] = useState('bun');
+  const { isModalOpen, toggleModalState, handleCloseModal } = useModalState();
+
+  const { container, orderContainer, list } = style;
+  const bun = ingredients.find(({ type }) => type === 'bun');
+  const total = ingredients.reduce((sum, { price }) => sum + (price as number), 0);
 
   return (
-    <div className={style.burgerConstructor}>
-      <h1 className={style.title}>Соберите бургер</h1>
+    <div className={container}>
+      <ul className={list}>
+        {bun && (<DetailsItem ingredient={bun} position="up" />)}
 
-      <div className={style.tabs}>
-        {Object.keys(TABS).map((key) => (
-          <Tab
-            key={key}
-            value={key}
-            active={currentTab === key}
-            onClick={setCurrentTab}
-          >
-            {TABS[key]}
-          </Tab>
+        {ingredients.map((item, index) => (
+          (item.type !== 'bun') && (<DetailsItem key={`${item._id}-${index}`} ingredient={item} />)
         ))}
+
+        {bun && (<DetailsItem ingredient={bun} position="down" />)}
+      </ul>
+
+      <div className={orderContainer}>
+        <div className={style.price}>
+          {total}
+          <CurrencyIcon type="primary" />
+        </div>
+
+        <Button htmlType="button" type="primary" size="medium" onClick={toggleModalState}>
+          Оформить заказ
+        </Button>
       </div>
 
-      <div className={style.listsContainer}>
-        {Object.keys(TABS).map((key) => (
-          <BurgerIngredients
-            key={key}
-            list={ingredients.filter(({ type }) => (type === key))}
-            title={TABS[key]}
-          />
-        ))}
-      </div>
+      {isModalOpen && <Modal closeModal={handleCloseModal}>123</Modal>}
     </div>
   );
 }
