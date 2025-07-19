@@ -1,4 +1,4 @@
-import style from './IngredientsList.module.scss';
+import style from './BurgerIngredients.module.scss';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 interface IProps {
@@ -6,7 +6,7 @@ interface IProps {
   title: string,
 }
 
-export default function IngredientsList({ list, title }: IProps) {
+export default function BurgerIngredients({ list, title }: IProps) {
   return (
     <div className={style.container}>
       <h2 className={style.title}>{title}</h2>

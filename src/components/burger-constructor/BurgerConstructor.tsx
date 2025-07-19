@@ -1,6 +1,6 @@
 import style from './BurgerConstructor.module.scss';
 import { useState } from 'react';
-import { IngredientsList } from '../index';
+import { BurgerIngredients } from '../index';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const TABS: Record<string, string> = {
@@ -35,7 +35,7 @@ export default function BurgerConstructor({ ingredients }: IProps) {
 
       <div className={style.listsContainer}>
         {Object.keys(TABS).map((key) => (
-          <IngredientsList
+          <BurgerIngredients
             key={key}
             list={ingredients.filter(({ type }) => (type === key))}
             title={TABS[key]}
