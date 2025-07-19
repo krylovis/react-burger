@@ -5,6 +5,7 @@ export { default as BurgerConstructor } from './burger-constructor/BurgerConstru
 export { default as IngredientsList } from './ingredients-list/IngredientsList';
 export { default as BurgerIngredients } from './burger-ingredients/BurgerIngredients';
 export { default as IngredientDetails } from './ingredient-details/IngredientDetails';
+export { default as OrderDetails } from './order-details/OrderDetails';
 export { default as DetailsItem } from './details-item/DetailsItem';
 export { default as ModalOverlay } from './modal-overlay/ModalOverlay';
 export { default as Modal } from './modal/Modal';

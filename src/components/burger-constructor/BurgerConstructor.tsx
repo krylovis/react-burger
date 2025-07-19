@@ -1,6 +1,6 @@
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './BurgerConstructor.module.scss';
-import { DetailsItem, Modal } from '../index';
+import { DetailsItem, OrderDetails } from '../index';
 import useModalState from '../../hooks/useModalState';
 
 interface IProps {
@@ -37,7 +37,7 @@ export default function BurgerConstructor({ ingredients }: IProps) {
         </Button>
       </div>
 
-      {isModalOpen && <Modal closeModal={handleCloseModal}>123</Modal>}
+      {isModalOpen && <OrderDetails closeModal={handleCloseModal} />}
     </div>
   );
 }
