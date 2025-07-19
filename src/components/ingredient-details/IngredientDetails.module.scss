@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 520px;
+}
+
+.ingredientImage {
+  width: 480px;
+}
+
+.name {
+  font-size: 24px;
+  padding: 16px 0 32px;
+  margin: 0;
+}
+
+.features {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #8585AD;
+  padding: 8px 0;
+}

@@ -1,5 +1,5 @@
 import style from './IngredientsList.module.scss';
-import { Modal } from '../index';
+import { IngredientDetails } from '../index';
 import { useState } from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import useModalState from '../../hooks/useModalState';
@@ -50,7 +50,7 @@ export default function IngredientsList({ list, title }: IProps) {
         })}
       </ul>
 
-      {(isModalOpen && currentItem) && <Modal closeModal={handleCloseItem}>123</Modal>}
+      {(isModalOpen && currentItem) && <IngredientDetails item={currentItem} handleCloseItem={handleCloseItem} />}
     </div>
   );
 }
