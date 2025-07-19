@@ -16,8 +16,9 @@ const modalContainer = document.querySelector('#modal')!
 export default function Modal({ closeModal, title, children }: IProps) {
   const handleStopPropagation = (e: SyntheticEvent) => e.stopPropagation();
 
-  let headerClasses = classNames(style.header);
-  if (!title) headerClasses += ` ${style['header_withoutTitle']}`;
+  const headerClasses = classNames(style.header, {
+    [style.header_withoutTitle]: !title,
+  });
 
   return createPortal(
     (
