@@ -35,6 +35,7 @@ export default function IngredientsList({ list, title }: IProps) {
           return (
             <li
               key={_id}
+              title={name as string}
               className={style.item}
               onClick={() => handleSelectItem(item)}
             >
