@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { createPortal } from 'react-dom';
 import { ModalOverlay } from '../index';
@@ -13,13 +14,16 @@ interface IProps {
 const modalContainer = document.querySelector('#modal')!
 
 export default function Modal({ closeModal, title, children }: IProps) {
-  const handleStopPropagation = (e: SyntheticEvent) => e.stopPropagation()
+  const handleStopPropagation = (e: SyntheticEvent) => e.stopPropagation();
+
+  let headerClasses = classNames(style.header);
+  if (!title) headerClasses += ` ${style['header_withoutTitle']}`;
 
   return createPortal(
     (
       <ModalOverlay closeModal={closeModal}>
         <div className={style.modal} onClick={handleStopPropagation}>
-          <div className={style.header}>
+          <div className={headerClasses}>
             {title && (<h2 className={style.title}>{title}</h2>)}
             <CloseIcon className={style.closeIcon} type='primary' onClick={closeModal} />
           </div>
