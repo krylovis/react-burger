@@ -1,18 +1,42 @@
 import classNames from 'classnames';
-import { DragIcon, CurrencyIcon, LockIcon, DeleteIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './DetailsItem.module.scss';
 
 interface IProps {
   ingredient: Record<string, string | number>,
   position?: string,
+
+}
+interface IElementProps {
+  text: string,
+  thumbnail: string,
+  price: number,
+  type?: 'top' | 'bottom' | undefined,
+  isLocked?: boolean | undefined,
+  extraClass?: string | undefined,
+  handleClose: (() => void) | undefined;
 }
 
 export default function DetailsItem({ ingredient, position }: IProps) {
-  const { type, image, name, price } = ingredient;
+  const { _id, type, image, name, price } = ingredient;
   const isBun = type === 'bun';
 
-  let classList = classNames(style.container,);
-  if (position) classList += ` ${style[`container_${position}`]}`;
+  const deleteItem = () => {
+    console.log('deleteItem', _id);
+  };
+
+  const props: IElementProps = {
+    text: name as string,
+    price: price as number,
+    thumbnail: image as string,
+    handleClose: deleteItem,
+  };
+
+  if (isBun) {
+    props.text = `${name as string} ${position === 'top' ? '(верх)' : '(низ)'}`;
+    props.isLocked = true;
+    props.type = position as 'top' | 'bottom';
+  }
 
   return (
     <li className={style.item}>
@@ -20,26 +44,7 @@ export default function DetailsItem({ ingredient, position }: IProps) {
         {!isBun && (<DragIcon type="primary" />)}
       </div>
 
-      <div className={classList}>
-        <img
-          className={style.image}
-          src={image as string}
-          alt="img"
-        />
-
-        <p className={style.name}>{name}</p>
-
-        <div className={style.price}>
-          {price}
-          <CurrencyIcon type="primary" />
-        </div>
-
-        {isBun ? (
-          <LockIcon type="secondary" />
-        ) : (
-          <DeleteIcon type="primary" />
-        )}
-      </div>
+      <ConstructorElement {...props} />
     </li>
   );
 }

@@ -17,13 +17,13 @@ export default function BurgerConstructor({ ingredients }: IProps) {
   return (
     <div className={container}>
       <ul className={list}>
-        {bun && (<DetailsItem ingredient={bun} position="up" />)}
+        {bun && (<DetailsItem ingredient={bun} position="top" />)}
 
         {ingredients.map((item, index) => (
           (item.type !== 'bun') && (<DetailsItem key={`${item._id}-${index}`} ingredient={item} />)
         ))}
 
-        {bun && (<DetailsItem ingredient={bun} position="down" />)}
+        {bun && (<DetailsItem ingredient={bun} position="bottom" />)}
       </ul>
 
       <div className={orderContainer}>
