@@ -39,7 +39,7 @@ export default function IngredientsList({ list, title }: IProps) {
               className={style.item}
               onClick={() => handleSelectItem(item)}
             >
-              <img src={image as string} alt="img" className={style.image} />
+              <img src={image as string} alt={`Фото ингредиента: ${{ name }}`} className={style.image} />
               <div className={style.price}>
                 {price}
                 <CurrencyIcon type="primary" />

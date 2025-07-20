@@ -21,7 +21,7 @@ export default function IngredientDetails({ handleCloseItem, item }: IProps) {
   return (
     <Modal title="Детали ингредиента" closeModal={handleCloseItem}>
       <div className={style.container}>
-        <img src={image as string} alt="img" className={style.ingredientImage} />
+        <img src={image as string} alt={`Фото ингредиента: ${{ name }}`} className={style.ingredientImage} />
         <p className={style.name}>{name}</p>
 
         <ul className={style.features}>

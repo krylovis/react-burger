@@ -21,7 +21,7 @@ export default function OrderDetails({ closeModal }: IProps) {
         <img
           className={style.image}
           src={checkGraphics as string}
-          alt="img"
+          alt="Картинка подтверждения заказа"
         />
 
         <p className={style.text}>Ваш заказ начали готовить</p>
