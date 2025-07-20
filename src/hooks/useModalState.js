@@ -7,6 +7,8 @@ export default function useModalState() {
   const handleCloseModal = () => setModalState(false);
   
   useEffect(() => {
+    if (!isModalOpen) return;
+
     const handleEscape = (e) => {
       if (e.key === 'Escape') handleCloseModal();
     };
