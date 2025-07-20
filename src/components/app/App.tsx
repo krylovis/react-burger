@@ -16,10 +16,10 @@ export default function App() {
       <AppHeader activeTab={activeTab} onSetActiveTab={handleSetActiveTab} />
 
       <Container>
-        <section className={style.appContainer}>
+        <main className={style.appContainer}>
           <BurgerIngredients ingredients={data} />
           <BurgerConstructor ingredients={selectedData} />
-        </section>
+        </main>
       </Container>
     </div>
   );
