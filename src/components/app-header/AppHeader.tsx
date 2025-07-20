@@ -10,7 +10,7 @@ interface IProps {
 
 export default function AppHeader({ activeTab, onSetActiveTab }: IProps) {
   return (
-    <div className={style.header}>
+    <header className={style.header}>
       <Container>
         <div className={style.header__container}>
           <nav className={style.header__nav}>
@@ -44,6 +44,6 @@ export default function AppHeader({ activeTab, onSetActiveTab }: IProps) {
           </Button>
         </ div>
       </Container>
-    </div>
+    </header>
   );
 }
