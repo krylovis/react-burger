@@ -3,6 +3,7 @@ import { IngredientDetails } from '../index';
 import { useState } from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import useModalState from '../../hooks/useModalState';
+import { Modal } from '../index';
 
 type TIngredient = Record<string, string | number>;
 interface IProps {
@@ -51,7 +52,13 @@ export default function IngredientsList({ list, title }: IProps) {
         })}
       </ul>
 
-      {(isModalOpen && currentItem) && <IngredientDetails item={currentItem} handleCloseItem={handleCloseItem} />}
+      {(isModalOpen && currentItem) &&
+        <Modal
+          title="Детали ингредиента"
+          closeModal={handleCloseItem}
+        >
+          <IngredientDetails item={currentItem} />
+        </Modal>}
     </div>
   );
 }
