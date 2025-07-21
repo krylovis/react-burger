@@ -29,11 +29,14 @@ export default function App() {
 
   useEffect(() => {
     const getIngredients = async () => {
-      const { data } = await ingredientsApi.getIngredients();
-
-      if (data) {
-        setIngredients({ data });
-        setSelectedData(getItems(data));
+      try {
+        const { data } = await ingredientsApi.getIngredients();
+        if (data) {
+          setIngredients({ data });
+          setSelectedData(getItems(data));
+        }
+      } catch (e) {
+        console.error(e);
       }
     }
 
