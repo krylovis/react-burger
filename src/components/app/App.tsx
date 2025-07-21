@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import style from './App.module.scss';
 import { AppHeader, Container, BurgerConstructor, BurgerIngredients } from '../index';
-import { ingredientsApi } from '../../utils/constants';
+import ingredientsApi from '../../utils/api/IngredientsApi';
 
 export default function App() {
   type TProps = Record<string, string | number>[];
@@ -27,21 +27,16 @@ export default function App() {
     return result;
   }
 
-  const getIngredients = async () => {
-    try {
-      await fetch(ingredientsApi)
-        .then(res => res.json())
-        .then(({ data }) => {
-          setIngredients({ data });
-          setSelectedData(getItems(data));
-        })
-        .catch(console.error);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   useEffect(() => {
+    const getIngredients = async () => {
+      const { data } = await ingredientsApi.getIngredients();
+
+      if (data) {
+        setIngredients({ data });
+        setSelectedData(getItems(data));
+      }
+    }
+
     getIngredients();
   }, []);
 
