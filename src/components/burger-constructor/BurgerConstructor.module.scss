@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0 40px;
+  width: 100%;
+}
+
+.orderContainer {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  justify-content: flex-end;
+  padding-top: 40px;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 24px;
+}
+
+.list {
+  flex: 1;
+  overflow: overlay;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  list-style-type: none;
+  margin: 60px 0 0;
+  gap: 16px;
+}

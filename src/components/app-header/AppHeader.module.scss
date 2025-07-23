@@ -1,0 +1,32 @@
+.header {
+  padding: 16px;
+  background-color: #1C1C21;
+  box-sizing: border-box;
+  width: 100%;
+
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__logo {
+    flex: 1;
+  }
+  
+  &__button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 20px;
+    color: #8585AD;
+  }
+}
+
+.activeBtn {
+  color: white !important;
+}
