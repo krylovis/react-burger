@@ -2,6 +2,8 @@ import style from './BurgerIngredients.module.scss';
 import { useState } from 'react';
 import { IngredientsList } from '../index';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useAppSelector } from '../../services/store';
+import { selectIngredients } from '../../services/store/slices/ingredients/ingredients.slice';
 
 const TABS: Record<string, string> = {
   bun: 'Булки',
@@ -9,12 +11,9 @@ const TABS: Record<string, string> = {
   main: 'Начинки',
 };
 
-interface IProps {
-  ingredients: Record<string, string | number>[],
-}
-
-export default function BurgerIngredients({ ingredients }: IProps) {
+export default function BurgerIngredients() {
   const [currentTab, setCurrentTab] = useState('bun');
+  const ingredients = useAppSelector((state) => selectIngredients(state));
 
   return (
     <div className={style.burgerIngredients}>
