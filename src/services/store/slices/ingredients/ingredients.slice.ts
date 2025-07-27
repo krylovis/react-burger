@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchIngredientsData } from './ingredientsExtraReducers';
 
@@ -24,7 +23,7 @@ interface IIngredientsState {
   ingredientsObject: Record<TIngredientId, TIngredient>;
   orderObject: {
     bun: TIngredient | null,
-    ingredients: Record<string, TIngredient>,
+    ingredients: TIngredient[],
   };
   isLoading: boolean,
   error: string | null,
@@ -33,7 +32,7 @@ interface IIngredientsState {
 const initialIngredientsState: IIngredientsState = {
   ingredients: [],
   ingredientsObject: {},
-  orderObject: { bun: null, ingredients: {}},
+  orderObject: { bun: null, ingredients: [] },
   isLoading: false,
   error: null,
 };
@@ -59,16 +58,18 @@ const ingredientsSlice = createSlice({
       if(state?.ingredientsObject[id].type === 'bun') {
         state.orderObject.bun = state.ingredientsObject[id]
       } else {
-        const uid = uuidv4();
-        state.orderObject.ingredients[uid] = { ...state.ingredientsObject[id] };
+        state.orderObject.ingredients.push({ ...state.ingredientsObject[id] });
       }
     },
-    deleteIngredientForOrder(state, action: PayloadAction<{ itemId: string }>) {
-      const { itemId } = action.payload;
-      
-      if (state.orderObject.ingredients[itemId]) {
-        delete state.orderObject.ingredients[itemId];
+    deleteIngredientForOrder(state, action: PayloadAction<{ index: number }>) {
+      const { index } = action.payload;
+      if (state.orderObject.ingredients[index]) {
+        state.orderObject.ingredients.splice(index, 1);
       }
+    },
+    updateIngredientForOrder(state, action: PayloadAction<{ data: TIngredient[] }>) {
+      const { data } = action.payload;
+      state.orderObject.ingredients = [...data];
     }
   },
   extraReducers: (builder) => {
@@ -93,7 +94,12 @@ const ingredientsSlice = createSlice({
   },
 });
 
-export const { setIngredients, setIngredientsForOrder, deleteIngredientForOrder } = ingredientsSlice.actions;
+export const {
+  setIngredients,
+  setIngredientsForOrder,
+  deleteIngredientForOrder,
+  updateIngredientForOrder,
+} = ingredientsSlice.actions;
 export const {
   selectIngredients,
   selectBun,

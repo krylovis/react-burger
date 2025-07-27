@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useDrop } from "react-dnd";
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './BurgerConstructor.module.scss';
@@ -9,7 +10,8 @@ import {
   selectOrderIngredients,
   selectBun,
   setIngredientsForOrder,
-  TIngredientId
+  TIngredientId,
+  updateIngredientForOrder,
 } from '../../services/store/slices/ingredients/ingredients.slice';
 
 export default function BurgerConstructor() {
@@ -30,16 +32,32 @@ export default function BurgerConstructor() {
   const bun = useAppSelector((state) => selectBun(state));
 
   const { container, orderContainer, list } = style;
+
   let totalPrice = Object.values(ingredients).reduce((sum, { price }) => sum + (price as number), 0);
   if (bun) totalPrice += bun.price;
+
+  const moveDetailsItemHandler = useCallback((dragIndex: number, hoverIndex: number) => {
+    const dragCard = ingredients[dragIndex];
+    const newIngredients = [...ingredients];
+
+    newIngredients.splice(dragIndex, 1);
+    newIngredients.splice(hoverIndex, 0, dragCard);
+
+    dispatch(updateIngredientForOrder({ data: newIngredients }));
+  }, [ingredients, dispatch])
 
   return (
     <div className={container}>
       <ul ref={(item) => { dropTarget(item) }} className={list}>
         {bun && (<DetailsItem ingredient={bun} position="top" />)}
 
-        {Object.keys(ingredients).map((key) => (
-          <DetailsItem key={key} id={key} ingredient={ingredients[key]} />
+        {ingredients.map((ingredient, index) => (
+          <DetailsItem
+            key={ingredient._id + index}
+            index={index}
+            ingredient={ingredient}
+            moveItem={moveDetailsItemHandler}
+          />
         ))}
 
         {bun && (<DetailsItem ingredient={bun} position="bottom" />)}
