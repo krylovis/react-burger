@@ -1,4 +1,5 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDrag } from "react-dnd";
 import style from './IngredientItem.module.scss';
 
 type TIngredient = Record<string, string | number>;
@@ -8,11 +9,16 @@ interface IProps {
 }
 
 export default function IngredientItem({ item, itemClick }: IProps) {
-  const { _id, image, price, name } = item;
+  const { image, price, name } = item;
+
+  const [, dragRef] = useDrag({
+    type: 'ingredient',
+    item: { itemId: item._id }
+  });
 
   return (
     <li
-      key={_id}
+      ref={(element) => { dragRef(element) }}
       title={name as string}
       className={style.item}
       onClick={() => itemClick(item)}

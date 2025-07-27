@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import style from './App.module.scss';
 import { useAppDispath } from '../../services/store';
 import { fetchIngredientsData } from '../../services/store/slices/ingredients/ingredientsExtraReducers';
@@ -21,8 +23,10 @@ export default function App() {
 
       <Container>
         <main className={style.appContainer}>
-          <BurgerIngredients />
-          {/* <BurgerConstructor /> */}
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
         </main>
       </Container>
     </div>

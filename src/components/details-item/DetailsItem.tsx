@@ -1,10 +1,12 @@
-import classNames from 'classnames';
 import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './DetailsItem.module.scss';
+import { deleteIngredientForOrder } from '../../services/store/slices/ingredients/ingredients.slice';
+import { useAppDispath } from '../../services/store';
 
 interface IProps {
   ingredient: Record<string, string | number>,
   position?: string,
+  id?: string,
 
 }
 interface IElementProps {
@@ -17,12 +19,13 @@ interface IElementProps {
   handleClose: (() => void) | undefined;
 }
 
-export default function DetailsItem({ ingredient, position }: IProps) {
-  const { _id, type, image, name, price } = ingredient;
+export default function DetailsItem({ id, ingredient, position }: IProps) {
+  const { type, image, name, price } = ingredient;
   const isBun = type === 'bun';
 
+  const dispatch = useAppDispath();
   const deleteItem = () => {
-    console.log('deleteItem', _id);
+    dispatch(deleteIngredientForOrder({ itemId: id as string }));
   };
 
   const props: IElementProps = {
