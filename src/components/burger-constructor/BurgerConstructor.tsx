@@ -30,7 +30,8 @@ export default function BurgerConstructor() {
   const bun = useAppSelector((state) => selectBun(state));
 
   const { container, orderContainer, list } = style;
-  const total = Object.values(ingredients).reduce((sum, { price }) => sum + (price as number), 0);
+  let totalPrice = Object.values(ingredients).reduce((sum, { price }) => sum + (price as number), 0);
+  if (bun) totalPrice += bun.price;
 
   return (
     <div className={container}>
@@ -46,7 +47,7 @@ export default function BurgerConstructor() {
 
       <div className={orderContainer}>
         <div className={style.price}>
-          {total}
+          {totalPrice}
           <CurrencyIcon type="primary" />
         </div>
 
