@@ -1,0 +1,23 @@
+.item {
+  box-sizing: border-box;
+  padding: 0 16px;
+  width: 272px;
+  cursor: pointer;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.name {
+  margin: 0;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  padding: 8px 0 20px;
+}
