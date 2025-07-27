@@ -1,6 +1,8 @@
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from "react-dnd";
 import style from './IngredientItem.module.scss';
+import { useAppSelector } from '../../services/store';
+import { selectOrderIngredients, selectBun } from '../../services/store/slices/ingredients/ingredients.slice';
 
 type TIngredient = Record<string, string | number>;
 interface IProps {
@@ -9,6 +11,17 @@ interface IProps {
 }
 
 export default function IngredientItem({ item, itemClick }: IProps) {
+  const bun = useAppSelector((state) => selectBun(state));
+  const ingredients = useAppSelector((state) => selectOrderIngredients(state));
+
+  let count = null;
+
+  if (item.type === 'bun' && bun?._id === item._id) {
+    count = 1;
+  } else {
+    count = ingredients.filter(({ _id }) => _id === item._id).length;
+  }
+
   const { image, price, name } = item;
 
   const [, dragRef] = useDrag({
@@ -23,6 +36,7 @@ export default function IngredientItem({ item, itemClick }: IProps) {
       className={style.item}
       onClick={() => itemClick(item)}
     >
+      {count > 0 && (<Counter count={count} />)}
       <img src={image as string} alt={`Фото ингредиента: ${{ name }}`} className={style.image} />
       <div className={style.price}>
         {price}
