@@ -1,6 +1,6 @@
+import { useState, forwardRef } from 'react';
 import style from './IngredientsList.module.scss';
 import { IngredientDetails } from '../index';
-import { useState } from 'react';
 import useModalState from '../../hooks/useModalState';
 import { Modal, IngredientItem } from '../index';
 
@@ -10,7 +10,7 @@ interface IProps {
   title: string,
 }
 
-export default function IngredientsList({ list, title }: IProps) {
+const BurgerIngredientType = forwardRef<HTMLDivElement, IProps>(({ list, title }, ref) => {
   const [currentItem, setCurrentItem] = useState<TIngredient | null>(null);
   const { isModalOpen, toggleModalState, handleCloseModal } = useModalState();
 
@@ -25,7 +25,7 @@ export default function IngredientsList({ list, title }: IProps) {
   };
 
   return (
-    <div className={style.container}>
+    <div ref={ref} className={style.container}>
       <h2 className={style.title}>{title}</h2>
 
       <ul className={style.list}>
@@ -47,4 +47,6 @@ export default function IngredientsList({ list, title }: IProps) {
         </Modal>}
     </div>
   );
-}
+})
+
+export default BurgerIngredientType;
