@@ -82,7 +82,13 @@ export default function BurgerConstructor() {
           <CurrencyIcon type="primary" />
         </div>
 
-        <Button htmlType="button" type="primary" size="medium" onClick={handleMakeOrder}>
+        <Button
+          htmlType="button"
+          type="primary"
+          size="medium"
+          disabled={!ingredients.length}
+          onClick={handleMakeOrder}
+        >
           Оформить заказ
         </Button>
       </div>
