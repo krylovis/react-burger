@@ -13,6 +13,7 @@ import {
   TIngredientId,
   updateIngredientForOrder,
 } from '../../services/store/slices/ingredients/ingredients.slice';
+import { fetchMakeOrder } from '../../services/store/slices/ingredients/ingredientsExtraReducers';
 
 export default function BurgerConstructor() {
   const dispatch = useAppDispath();
@@ -35,6 +36,18 @@ export default function BurgerConstructor() {
 
   let totalPrice = Object.values(ingredients).reduce((sum, { price }) => sum + (price as number), 0);
   if (bun) totalPrice += bun.price;
+
+  const handleMakeOrder = async () => {
+    toggleModalState();
+    const data: { ingredients: string[] } = { ingredients: ingredients.map(({ _id }) => _id) };
+    if (bun) data.ingredients.push(bun._id);
+
+    try {
+      await dispatch(fetchMakeOrder(data));
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const moveDetailsItemHandler = useCallback((dragIndex: number, hoverIndex: number) => {
     const dragCard = ingredients[dragIndex];
@@ -69,7 +82,7 @@ export default function BurgerConstructor() {
           <CurrencyIcon type="primary" />
         </div>
 
-        <Button htmlType="button" type="primary" size="medium" onClick={toggleModalState}>
+        <Button htmlType="button" type="primary" size="medium" onClick={handleMakeOrder}>
           Оформить заказ
         </Button>
       </div>

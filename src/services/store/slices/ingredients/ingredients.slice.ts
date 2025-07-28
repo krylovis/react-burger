@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchIngredientsData } from './ingredientsExtraReducers';
+import { fetchIngredientsData, fetchMakeOrder } from './ingredientsExtraReducers';
 
 export type TIngredientId = string;
 
@@ -24,6 +24,7 @@ interface IIngredientsState {
   orderObject: {
     bun: TIngredient | null,
     ingredients: TIngredient[],
+    orderNumber: number | null,
   };
   isLoading: boolean,
   error: string | null,
@@ -32,7 +33,7 @@ interface IIngredientsState {
 const initialIngredientsState: IIngredientsState = {
   ingredients: [],
   ingredientsObject: {},
-  orderObject: { bun: null, ingredients: [] },
+  orderObject: { bun: null, ingredients: [], orderNumber: null },
   isLoading: false,
   error: null,
 };
@@ -70,6 +71,13 @@ const ingredientsSlice = createSlice({
     updateIngredientForOrder(state, action: PayloadAction<{ data: TIngredient[] }>) {
       const { data } = action.payload;
       state.orderObject.ingredients = [...data];
+    },
+    setOrderNumber(state, action: PayloadAction<{ order: Record<string, string | number>}>) {
+      const { order } = action.payload;
+      state.orderObject.orderNumber = order.number as number;
+    },
+    resetOrderNumber(state) {
+      state.orderObject.orderNumber = null;
     }
   },
   extraReducers: (builder) => {
@@ -84,11 +92,22 @@ const ingredientsSlice = createSlice({
         state.error = action.payload as string;
         state.isLoading = false;
       })
+      .addCase(fetchMakeOrder.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchMakeOrder.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(fetchMakeOrder.rejected, (state, action) => {
+        state.error = action.payload as string;
+        state.isLoading = false;
+      })
   },
   selectors: {
     selectIngredients: (state) => state.ingredients,
     selectBun: (state) => state.orderObject.bun,
     selectOrderIngredients: (state) => state.orderObject.ingredients,
+    selectOrderNumber: (state) => state.orderObject.orderNumber,
     selectIngredientsError: (state) => state.error,
     selectIngredientsLoading: (state) => state.isLoading,
   },
@@ -99,11 +118,14 @@ export const {
   setIngredientsForOrder,
   deleteIngredientForOrder,
   updateIngredientForOrder,
+  setOrderNumber,
+  resetOrderNumber,
 } = ingredientsSlice.actions;
 export const {
   selectIngredients,
   selectBun,
   selectOrderIngredients,
+  selectOrderNumber,
   selectIngredientsError,
   selectIngredientsLoading
 } = ingredientsSlice.selectors;
