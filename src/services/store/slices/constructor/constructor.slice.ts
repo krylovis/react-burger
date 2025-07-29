@@ -1,9 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 import { TIngredient } from '../ingredients/ingredients.slice';
 
+export interface TOrderIngredient extends TIngredient {
+  key: string;
+}
 interface IConstructorState {
   bun: TIngredient | null,
-  orderIngredients: TIngredient[],
+  orderIngredients: TOrderIngredient[],
   orderNumber: number | null,
 };
 
@@ -24,7 +28,7 @@ const constructorSlice = createSlice({
       if(item.type === 'bun') {
         state.bun = {...item};
       } else {
-        state.orderIngredients.push({ ...item });
+        state.orderIngredients.push({ ...item, key: uuidv4() });
       }
     },
     deleteIngredientForOrder(state, action: PayloadAction<{ index: number }>) {
@@ -33,7 +37,7 @@ const constructorSlice = createSlice({
         state.orderIngredients.splice(index, 1);
       }
     },
-    updateIngredientForOrder(state, action: PayloadAction<{ data: TIngredient[] }>) {
+    updateIngredientForOrder(state, action: PayloadAction<{ data: TOrderIngredient[] }>) {
       const { data } = action.payload;
       state.orderIngredients = [...data];
     },

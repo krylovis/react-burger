@@ -68,7 +68,7 @@ export default function BurgerConstructor() {
 
         {ingredients.map((ingredient, index) => (
           <DetailsItem
-            key={ingredient._id + index}
+            key={ingredient.key}
             index={index}
             ingredient={ingredient}
             moveItem={moveDetailsItemHandler}

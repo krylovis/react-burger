@@ -3,11 +3,12 @@ import classNames from 'classnames';
 import { useDrag, useDrop } from "react-dnd";
 import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './DetailsItem.module.scss';
-import { deleteIngredientForOrder } from '../../services/store/slices/constructor/constructor.slice';
+import { TIngredient } from '../../services/store/slices/ingredients/ingredients.slice';
+import { TOrderIngredient, deleteIngredientForOrder } from '../../services/store/slices/constructor/constructor.slice';
 import { useAppDispath } from '../../services/store';
 
 interface IProps {
-  ingredient: Record<string, string | number>,
+  ingredient: TIngredient | TOrderIngredient,
   position?: string,
   id?: string,
   index?: number,
