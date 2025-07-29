@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { useDrag, useDrop } from "react-dnd";
 import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './DetailsItem.module.scss';
-import { deleteIngredientForOrder } from '../../services/store/slices/ingredients/ingredients.slice';
+import { deleteIngredientForOrder } from '../../services/store/slices/constructor/constructor.slice';
 import { useAppDispath } from '../../services/store';
 
 interface IProps {

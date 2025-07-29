@@ -4,7 +4,7 @@ import style from './OrderDetails.module.scss';
 import { Modal } from '../index';
 import checkGraphics from '../../images/check-graphics.svg';
 import { useAppSelector } from '../../services/store';
-import { selectOrderNumber, resetOrderNumber } from '../../services/store/slices/ingredients/ingredients.slice';
+import { selectOrderNumber, resetOrderNumber } from '../../services/store/slices/constructor/constructor.slice';
 import { useAppDispath } from '../../services/store';
 
 interface IProps {

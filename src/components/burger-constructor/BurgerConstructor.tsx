@@ -4,21 +4,29 @@ import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-co
 import style from './BurgerConstructor.module.scss';
 import { DetailsItem, OrderDetails } from '../index';
 import useModalState from '../../hooks/useModalState';
-import { useAppSelector } from '../../services/store';
-import { useAppDispath } from '../../services/store';
+import { useAppSelector, useAppDispath } from '../../services/store';
+import { selectIngredientsObject, TIngredientId } from '../../services/store/slices/ingredients/ingredients.slice';
 import {
   selectOrderIngredients,
   selectBun,
   setIngredientsForOrder,
-  TIngredientId,
   updateIngredientForOrder,
-} from '../../services/store/slices/ingredients/ingredients.slice';
-import { fetchMakeOrder } from '../../services/store/slices/ingredients/ingredientsExtraReducers';
+} from '../../services/store/slices/constructor/constructor.slice';
+import { fetchMakeOrder } from '../../services/store/slices/constructor/constructorExtraReducers';
 
 export default function BurgerConstructor() {
+  const { container, orderContainer, list } = style;
+
+  const { isModalOpen, toggleModalState, handleCloseModal } = useModalState();
+  const ingredients = useAppSelector((state) => selectOrderIngredients(state));
+  const bun = useAppSelector((state) => selectBun(state));
+
+  const ingredientsObject = useAppSelector((state) => selectIngredientsObject(state));
+
+
   const dispatch = useAppDispath();
   const onDropHandler = (itemId: TIngredientId) => {
-    dispatch(setIngredientsForOrder({ id: itemId }));
+    dispatch(setIngredientsForOrder({ item: ingredientsObject[itemId] }));
   }
 
   const [, dropTarget] = useDrop({
@@ -27,12 +35,6 @@ export default function BurgerConstructor() {
       onDropHandler(itemId);
     },
   });
-
-  const { isModalOpen, toggleModalState, handleCloseModal } = useModalState();
-  const ingredients = useAppSelector((state) => selectOrderIngredients(state));
-  const bun = useAppSelector((state) => selectBun(state));
-
-  const { container, orderContainer, list } = style;
 
   let totalPrice = Object.values(ingredients).reduce((sum, { price }) => sum + (price as number), 0);
   if (bun) totalPrice += bun.price;
