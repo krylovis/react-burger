@@ -18,10 +18,10 @@ interface IElementProps {
   text: string,
   thumbnail: string,
   price: number,
-  type?: 'top' | 'bottom' | undefined,
-  isLocked?: boolean | undefined,
-  extraClass?: string | undefined,
-  handleClose: (() => void) | undefined;
+  type?: 'top' | 'bottom',
+  isLocked?: boolean,
+  extraClass?: string,
+  handleClose: (() => void);
 }
 
 export default function DetailsItem({ index, ingredient, position, moveItem }: IProps) {
