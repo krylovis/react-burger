@@ -12,7 +12,7 @@ interface ITabs {
 }
 export default function BurgerIngredients() {
   const [currentTab, setCurrentTab] = useState('bun');
-  const ingredients = useAppSelector((state) => selectIngredients(state));
+  const ingredients = useAppSelector(selectIngredients);
 
   const tabClickHandler = (ref: RefObject<HTMLDivElement | null>) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' })

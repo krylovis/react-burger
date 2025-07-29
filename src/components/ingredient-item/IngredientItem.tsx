@@ -11,8 +11,8 @@ interface IProps {
 }
 
 export default function IngredientItem({ item, itemClick }: IProps) {
-  const bun = useAppSelector((state) => selectBun(state));
-  const ingredients = useAppSelector((state) => selectOrderIngredients(state));
+  const bun = useAppSelector(selectBun);
+  const ingredients = useAppSelector(selectOrderIngredients);
 
   let count = null;
 

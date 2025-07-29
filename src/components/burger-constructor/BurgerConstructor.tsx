@@ -18,10 +18,10 @@ export default function BurgerConstructor() {
   const { container, orderContainer, list } = style;
 
   const { isModalOpen, toggleModalState, handleCloseModal } = useModalState();
-  const ingredients = useAppSelector((state) => selectOrderIngredients(state));
-  const bun = useAppSelector((state) => selectBun(state));
+  const ingredients = useAppSelector(selectOrderIngredients);
+  const bun = useAppSelector(selectBun);
 
-  const ingredientsObject = useAppSelector((state) => selectIngredientsObject(state));
+  const ingredientsObject = useAppSelector(selectIngredientsObject);
 
 
   const dispatch = useAppDispath();

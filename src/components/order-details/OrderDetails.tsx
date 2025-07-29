@@ -16,7 +16,7 @@ export default function OrderDetails({ closeModal }: IProps) {
   const idTextClass = classNames(style.text, style.orderId);
   const secondaryTextClass = classNames(style.text, style.textSecondary);
 
-  const number = useAppSelector((state) => selectOrderNumber(state));
+  const number = useAppSelector(selectOrderNumber);
 
   const dispatch = useAppDispath();
   const handleCloseModal = () => {
