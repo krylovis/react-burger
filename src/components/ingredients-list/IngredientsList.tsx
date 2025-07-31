@@ -1,9 +1,8 @@
+import { useState, forwardRef } from 'react';
 import style from './IngredientsList.module.scss';
 import { IngredientDetails } from '../index';
-import { useState } from 'react';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import useModalState from '../../hooks/useModalState';
-import { Modal } from '../index';
+import { Modal, IngredientItem } from '../index';
 
 type TIngredient = Record<string, string | number>;
 interface IProps {
@@ -11,7 +10,7 @@ interface IProps {
   title: string,
 }
 
-export default function IngredientsList({ list, title }: IProps) {
+const BurgerIngredientType = forwardRef<HTMLDivElement, IProps>(({ list, title }, ref) => {
   const [currentItem, setCurrentItem] = useState<TIngredient | null>(null);
   const { isModalOpen, toggleModalState, handleCloseModal } = useModalState();
 
@@ -26,30 +25,17 @@ export default function IngredientsList({ list, title }: IProps) {
   };
 
   return (
-    <div className={style.container}>
+    <div ref={ref} className={style.container}>
       <h2 className={style.title}>{title}</h2>
 
       <ul className={style.list}>
-        {list.map((item) => {
-          const { _id, image, price, name } = item;
-
-          return (
-            <li
-              key={_id}
-              title={name as string}
-              className={style.item}
-              onClick={() => handleSelectItem(item)}
-            >
-              <img src={image as string} alt={`Фото ингредиента: ${{ name }}`} className={style.image} />
-              <div className={style.price}>
-                {price}
-                <CurrencyIcon type="primary" />
-              </div>
-
-              <p className={style.name}>{name}</p>
-            </li>
-          )
-        })}
+        {list.map((item) => (
+          <IngredientItem
+            key={item._id}
+            item={item}
+            itemClick={handleSelectItem}
+          />
+        ))}
       </ul>
 
       {(isModalOpen && currentItem) &&
@@ -61,4 +47,6 @@ export default function IngredientsList({ list, title }: IProps) {
         </Modal>}
     </div>
   );
-}
+})
+
+export default BurgerIngredientType;

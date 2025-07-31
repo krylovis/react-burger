@@ -3,6 +3,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  opacity: 1;
+  transition: 0.3s ease;
+
+  &_drag {
+    opacity: 0;
+  }
 }
 
 .container {
