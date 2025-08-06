@@ -4,6 +4,7 @@ import style from './App.module.scss';
 import {
   MainPage,
   LoginPage,
+  ProfilePage,
   RegisterPage,
   ForgotPasswordPage,
   ResetPasswordPage,
@@ -27,6 +28,7 @@ export default function App() {
       <Container>
         <Routes>
           <Route path={ROUTES.MAIN} element={<MainPage />} />
+          <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
           <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />

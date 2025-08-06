@@ -12,19 +12,20 @@ interface IProps {
 export default function MainForm({ children, formTitle, submitText, onSubmit }: IProps) {
   return (
     <section className={style.mainForm}>
-      <h1 className={style.mainForm__title}>{formTitle}</h1>
-
+      {formTitle && (<h1 className={style.mainForm__title}>{formTitle}</h1>)}
       <form className={style.mainForm__form} action="action">
         {children}
 
-        <div className={style.mainForm__btnContainer}>
-          <Button
-            htmlType="submit"
-            type="primary"
-            onClick={onSubmit}>
-            {submitText}
-          </Button>
-        </div>
+        {submitText && (
+          <div className={style.mainForm__btnContainer}>
+            <Button
+              htmlType="submit"
+              type="primary"
+              onClick={onSubmit}>
+              {submitText}
+            </Button>
+          </div>
+        )}
       </form>
     </section>
   );
