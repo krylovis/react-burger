@@ -10,3 +10,4 @@ export { default as OrderDetails } from './order-details/OrderDetails';
 export { default as DetailsItem } from './details-item/DetailsItem';
 export { default as ModalOverlay } from './modal-overlay/ModalOverlay';
 export { default as Modal } from './modal/Modal';
+export { default as MainForm } from './main-form/MainForm';
