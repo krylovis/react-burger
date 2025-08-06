@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import style from './App.module.scss';
-import { MainPage } from '../../pages';
+import { MainPage, LoginPage } from '../../pages';
 import { AppHeader, Container } from '../index';
 
 export default function App() {
@@ -19,6 +19,7 @@ export default function App() {
       <Container>
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Container>
     </div>
