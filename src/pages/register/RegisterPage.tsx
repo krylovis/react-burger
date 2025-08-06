@@ -1,17 +1,18 @@
 import React, { useState, useCallback, FormEvent } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../../utils/constants';
-import { EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { MainForm } from '../../components';
-import style from './LoginPage.module.scss';
+import style from './RegisterPage.module.scss';
 
-interface ILoginForm {
+interface IProfileForm {
+  name: '',
   email: '',
   password: '',
 }
 
-export default function LoginPage() {
-  const [formData, setFormData] = useState<ILoginForm>({ email: '', password: '' });
+export default function RegisterPage() {
+  const [formData, setFormData] = useState<IProfileForm>({ name: '', email: '', password: '' });
 
   const handleSetValue = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
@@ -32,12 +33,21 @@ export default function LoginPage() {
   }, [formData]);
 
   return (
-    <div className={style.loginPage}>
+    <div className={style.registerPage}>
       <MainForm
-        formTitle="Вход"
-        submitText="Войти"
+        formTitle="Регистрация"
+        submitText="Зарегистрироваться"
         onSubmit={handleSubmit}
       >
+        <Input
+          type="text"
+          placeholder="Имя"
+          onChange={handleSetValue}
+          value={formData.name}
+          name="name"
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        />
         <EmailInput
           placeholder={'E-mail'}
           onChange={handleSetValue}
@@ -54,13 +64,8 @@ export default function LoginPage() {
 
       <div className={style.footer}>
         <div className={style.linkContainer}>
-          <span className={style.linkText}>Вы — новый пользователь?</span>
-          <NavLink className={style.link} to={ROUTES.REGISTER}>Зарегистрироваться</NavLink>
-        </div>
-
-        <div className={style.linkContainer}>
-          <span className={style.linkText}>Забыли пароль?</span>
-          <NavLink className={style.link} to={ROUTES.FORGOT_PASSWORD}>Восстановить пароль</NavLink>
+          <span className={style.linkText}>Уже зарегистрированы?</span>
+          <NavLink className={style.link} to={ROUTES.LOGIN}>Войти</NavLink>
         </div>
       </div>
     </div>
