@@ -1,8 +1,9 @@
 import React, { useState, useCallback, FormEvent } from 'react';
+import { NavLink } from 'react-router-dom';
+import { ROUTES } from '../../utils/constants';
 import { EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { MainForm } from '../../components';
 import style from './LoginPage.module.scss';
-import { NavLink } from 'react-router-dom';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -49,12 +50,12 @@ export default function LoginPage() {
       <div className={style.footer}>
         <div className={style.linkContainer}>
           <span className={style.linkText}>Вы — новый пользователь?</span>
-          <NavLink className={style.link} to={'/register'}>Зарегистрироваться</NavLink>
+          <NavLink className={style.link} to={ROUTES.REGISTER}>Зарегистрироваться</NavLink>
         </div>
 
         <div className={style.linkContainer}>
           <span className={style.linkText}>Забыли пароль?</span>
-          <NavLink className={style.link} to={'/forgot-password'}>Восстановить пароль</NavLink>
+          <NavLink className={style.link} to={ROUTES.FORGOT_PASSWORD}>Восстановить пароль</NavLink>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import style from './App.module.scss';
 import { MainPage, LoginPage, NotFoundPage } from '../../pages';
 import { AppHeader, Container } from '../index';
+import { ROUTES } from '../../utils/constants';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('constructor');
@@ -18,9 +19,9 @@ export default function App() {
 
       <Container>
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path={ROUTES.MAIN} element={<MainPage />} />
+          <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+          <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
         </Routes>
       </Container>
     </div>
