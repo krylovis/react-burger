@@ -6,9 +6,9 @@ import { MainForm } from '../../components';
 import style from './RegisterPage.module.scss';
 
 interface IRegisterForm {
-  name: '',
-  email: '',
-  password: '',
+  name: string,
+  email: string,
+  password: string,
 }
 
 export default function RegisterPage() {

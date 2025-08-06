@@ -6,8 +6,8 @@ import { MainForm } from '../../components';
 import style from './LoginPage.module.scss';
 
 interface ILoginForm {
-  email: '',
-  password: '',
+  email: string,
+  password: string,
 }
 
 export default function LoginPage() {

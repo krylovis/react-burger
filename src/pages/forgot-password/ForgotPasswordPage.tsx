@@ -6,7 +6,7 @@ import { MainForm } from '../../components';
 import style from './ForgotPassword.module.scss';
 
 interface IForgotPasswordForm {
-  email: '',
+  email: string,
 }
 
 export default function ForgotPasswordPage() {
