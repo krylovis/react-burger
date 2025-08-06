@@ -4,7 +4,7 @@ import style from './MainForm.module.scss';
 
 interface IProps {
   formTitle?: string,
-  children: ReactElement[],
+  children: ReactElement | ReactElement[],
   submitText?: string,
   onSubmit?: (e: FormEvent) => void,
 }

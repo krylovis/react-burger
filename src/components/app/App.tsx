@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import style from './App.module.scss';
-import { MainPage, LoginPage, RegisterPage, NotFoundPage } from '../../pages';
+import { MainPage, LoginPage, RegisterPage, ForgotPasswordPage, NotFoundPage } from '../../pages';
 import { AppHeader, Container } from '../index';
 import { ROUTES } from '../../utils/constants';
 
@@ -22,6 +22,7 @@ export default function App() {
           <Route path={ROUTES.MAIN} element={<MainPage />} />
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+          <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />
           <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
         </Routes>
       </Container>
