@@ -5,14 +5,14 @@ import { Input, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-
 import { MainForm } from '../../components';
 import style from './RegisterPage.module.scss';
 
-interface IProfileForm {
+interface IRegisterForm {
   name: '',
   email: '',
   password: '',
 }
 
 export default function RegisterPage() {
-  const [formData, setFormData] = useState<IProfileForm>({ name: '', email: '', password: '' });
+  const [formData, setFormData] = useState<IRegisterForm>({ name: '', email: '', password: '' });
 
   const handleSetValue = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;

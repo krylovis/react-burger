@@ -5,12 +5,12 @@ import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { MainForm } from '../../components';
 import style from './ForgotPassword.module.scss';
 
-interface IProfileForm {
+interface IForgotPasswordForm {
   email: '',
 }
 
 export default function ForgotPasswordPage() {
-  const [formData, setFormData] = useState<IProfileForm>({ email: '' });
+  const [formData, setFormData] = useState<IForgotPasswordForm>({ email: '' });
 
   const handleSetValue = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
