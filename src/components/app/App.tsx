@@ -12,9 +12,14 @@ import {
 } from '../../pages';
 import { AppHeader, Container } from '../index';
 import { ROUTES } from '../../utils/constants';
+import { useAppDispath } from '../../services/store';
+import { fetchUser } from '../../services/store/slices/auth/authExtraReducers';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('constructor');
+
+  const dispatch = useAppDispath();
+  dispatch(fetchUser());
 
   const handleSetActiveTab = (newValues: string) => {
     if (activeTab === newValues) return;
