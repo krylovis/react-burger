@@ -58,8 +58,8 @@ export class BaseApi {
       .then(this._getResponse);
   }
 
-  public get(path: string) {
-    return this._request({ path, options: { method: METHODS.GET } });
+  public get(path: string, data?: RequestInit) {
+    return this._request({ path, options: { method: METHODS.GET, ...data } });
   }
 
   public post(path: string, data?: RequestInit) {
