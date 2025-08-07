@@ -2,6 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { MainForm } from '../../components';
 import style from './ProfilePage.module.scss';
+import { useAppSelector, useAppDispath } from '../../services/store';
+import { selectUser } from '../../services/store/slices/auth/auth.slice';
 
 interface IProfileForm {
   name: string,
@@ -10,9 +12,10 @@ interface IProfileForm {
 }
 
 export default function ProfilePage() {
+  const user = useAppSelector(selectUser);
   const [formData, setFormData] = useState<IProfileForm>({
-    name: 'Марк',
-    login: 'mail@stellar.burgers',
+    name: user?.name || '',
+    login: user?.email || '',
     password: '******',
   });
 
