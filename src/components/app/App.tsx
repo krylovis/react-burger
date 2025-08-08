@@ -19,7 +19,12 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('constructor');
 
   const dispatch = useAppDispath();
-  dispatch(fetchUser());
+
+  try {
+    dispatch(fetchUser());
+  } catch (error) {
+    console.error(error);
+  }
 
   const handleSetActiveTab = (newValues: string) => {
     if (activeTab === newValues) return;
