@@ -41,12 +41,10 @@ class AuthApi extends BaseApi {
     return this.post('/register', { body: JSON.stringify(data) });
   }
 
-  public logoutRequest(data: IReqData) {
-    return this.post('/logout', { body: JSON.stringify(data) });
-  }
-
-  public tokenRequest(data: IReqData) {
-    return this.post('/token', { body: JSON.stringify(data) });
+  public logoutRequest() {
+    return this.post('/logout', {
+      body: JSON.stringify({ token: getCookie('refreshToken') })
+    });
   }
 }
 

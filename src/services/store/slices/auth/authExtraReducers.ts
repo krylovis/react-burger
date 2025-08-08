@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import authApi, { IReqData } from '../../../../utils/api/AuthApi';
 import { setCookie } from '../../../../utils/cookies';
-import { setUser } from './auth.slice';
+import { setUser, logoutUser } from './auth.slice';
 
 export const fetchLogin = createAsyncThunk('auth/login',
   async (data: IReqData, { rejectWithValue, dispatch }) => {
@@ -57,6 +57,26 @@ export const fetchUser = createAsyncThunk('auth/getUser',
     try {
       const response = await authApi.getUserRequest();
       dispatch(setUser(response.user));
+      return response;
+    } catch (error) {
+      if ((error as Error).message === 'jwt expired') {
+        await dispatch(refreshToken());
+        dispatch(fetchUser());
+      }
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('Произошла неизвестная ошибка');
+    }
+  });
+
+  export const fetchLogout = createAsyncThunk('auth/logout',
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await authApi.logoutRequest();
+      dispatch(logoutUser());
+      setCookie('accessToken', '', { expires: -1 });
+      setCookie('refreshToken', '', { expires: -1 });
       return response;
     } catch (error) {
       if ((error as Error).message === 'jwt expired') {

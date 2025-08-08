@@ -1,5 +1,21 @@
 .profilePage {
   display: flex;
-  flex-direction: column;
+  gap: 60px;
   padding-top: 120px;
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__button {
+    font-size: 24px;
+    padding: 18px 20px;
+    color: #8585AD;
+    text-align: start;
+  }
+
+  .activeBtn {
+  color: white !important;
+}
 }
