@@ -37,6 +37,21 @@ export const fetchRegister = createAsyncThunk('auth/register',
     }
   });
 
+export const refreshToken = createAsyncThunk('auth/refreshToke',
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await authApi.refreshTokenRequest();
+      setCookie('accessToken', response.accessToken);
+      setCookie('refreshToken', response.refreshToken);
+      return response;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('Произошла неизвестная ошибка');
+    }
+  });
+
 export const fetchUser = createAsyncThunk('auth/getUser',
   async (_, { rejectWithValue, dispatch }) => {
     try {
@@ -44,6 +59,10 @@ export const fetchUser = createAsyncThunk('auth/getUser',
       dispatch(setUser(response.user));
       return response;
     } catch (error) {
+      if ((error as Error).message === 'jwt expired') {
+        await dispatch(refreshToken());
+        dispatch(fetchUser());
+      }
       if (error instanceof Error) {
         return rejectWithValue(error.message);
       }

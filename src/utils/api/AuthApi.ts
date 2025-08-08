@@ -31,6 +31,12 @@ class AuthApi extends BaseApi {
     });
   }
 
+  public refreshTokenRequest() {
+    return this.post('/token', {
+      body: JSON.stringify({ token: getCookie('refreshToken') })
+    });
+  }
+
   public registerRequest(data: IReqData) {
     return this.post('/register', { body: JSON.stringify(data) });
   }
