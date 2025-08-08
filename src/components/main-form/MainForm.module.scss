@@ -7,6 +7,10 @@
   align-self: center;
   align-items: center;
 
+  &_type_profile {
+    align-self: flex-start;
+  }
+
   &__title {
     margin: 0;
     padding-bottom: 24px;
