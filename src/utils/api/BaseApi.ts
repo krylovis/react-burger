@@ -41,7 +41,7 @@ export class BaseApi {
     const contentType = res.headers.get('Content-Type');
 
     if (!res.ok) {
-      return Promise.reject(new Error(`Ошибка: ${res.status}`));
+      return res.json().then((error) => Promise.reject(error));
     }
 
     if (contentType?.includes('json')) {
