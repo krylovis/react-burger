@@ -10,7 +10,7 @@ import {
   ResetPasswordPage,
   NotFoundPage,
 } from '../../pages';
-import { AppHeader, Container } from '../index';
+import { AppHeader, Container, ProtectedRoute } from '../index';
 import { ROUTES } from '../../utils/constants';
 import { useAppDispath } from '../../services/store';
 import { fetchUser } from '../../services/store/slices/auth/authExtraReducers';
@@ -37,8 +37,11 @@ export default function App() {
 
       <Container>
         <Routes>
+          <Route
+            path={ROUTES.PROFILE}
+            element={<ProtectedRoute element={() => (<ProfilePage />)} />}
+          />
           <Route path={ROUTES.MAIN} element={<MainPage />} />
-          <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
           <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />
