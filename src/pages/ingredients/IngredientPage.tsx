@@ -10,7 +10,7 @@ export default function IngredientPage() {
 
   return (
     <div className={style.ingredientPage}>
-      <h1 className={style.ingredientTitle}>Детали ингредиент</h1>
+      <h1 className={style.ingredientTitle}>Детали ингредиента</h1>
       {item && (<IngredientDetails item={item} />)}
     </div>
   );
