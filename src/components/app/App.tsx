@@ -9,11 +9,13 @@ import {
   ForgotPasswordPage,
   ResetPasswordPage,
   NotFoundPage,
+  IngredientPage,
 } from '../../pages';
 import { AppHeader, Container, ProtectedRoute } from '../index';
 import { ROUTES } from '../../utils/constants';
 import { useAppDispath } from '../../services/store';
 import { fetchUser } from '../../services/store/slices/auth/authExtraReducers';
+import { fetchIngredientsData } from '../../services/store/slices/ingredients/ingredientsExtraReducers';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('constructor');
@@ -22,6 +24,7 @@ export default function App() {
 
   try {
     dispatch(fetchUser());
+    dispatch(fetchIngredientsData());
   } catch (error) {
     console.error(error);
   }
