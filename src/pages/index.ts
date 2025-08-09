@@ -5,3 +5,4 @@ export { default as RegisterPage } from './register/RegisterPage';
 export { default as ForgotPasswordPage } from './forgot-password/ForgotPasswordPage';
 export { default as ResetPasswordPage } from './reset-password/ResetPasswordPage';
 export { default as NotFoundPage } from './not-found-page/NotFoundPage';
+export { default as IngredientPage } from './ingredients/IngredientPage';

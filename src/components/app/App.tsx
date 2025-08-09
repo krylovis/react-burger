@@ -44,6 +44,7 @@ export default function App() {
             path={ROUTES.PROFILE}
             element={<ProtectedRoute element={() => (<ProfilePage />)} />}
           />
+          <Route path={ROUTES.INGREDIENTS} element={<IngredientPage />} />
           <Route path={ROUTES.MAIN} element={<MainPage />} />
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.REGISTER} element={<RegisterPage />} />

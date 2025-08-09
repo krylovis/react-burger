@@ -63,6 +63,9 @@ const ingredientsSlice = createSlice({
   selectors: {
     selectIngredients: (state) => state.ingredients,
     selectIngredientsObject: (state) => state.ingredientsObject,
+    selectIngredientById: (state, id) => {
+      return state.ingredientsObject[id] || null;
+    },
     selectIngredientsError: (state) => state.error,
     selectIngredientsLoading: (state) => state.isLoading,
   },
@@ -72,6 +75,7 @@ export const { setIngredients } = ingredientsSlice.actions;
 export const {
   selectIngredients,
   selectIngredientsObject,
+  selectIngredientById,
   selectIngredientsError,
   selectIngredientsLoading
 } = ingredientsSlice.selectors;
