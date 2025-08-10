@@ -1,8 +1,9 @@
 import React, { useState, useCallback, FormEvent } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/constants';
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { MainForm } from '../../components';
+import passwordResetApi, { IReqData } from '../../utils/api/PasswordResetApi';
 import style from './ForgotPassword.module.scss';
 
 interface IForgotPasswordForm {
@@ -10,7 +11,8 @@ interface IForgotPasswordForm {
 }
 
 export default function ForgotPasswordPage() {
-  const [formData, setFormData] = useState<IForgotPasswordForm>({ email: '' });
+  const [formData, setFormData] = useState<IForgotPasswordForm | IReqData>({ email: '' });
+  const navigate = useNavigate();
 
   const handleSetValue = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
@@ -27,7 +29,14 @@ export default function ForgotPasswordPage() {
 
   const handleSubmit = useCallback(async (e: FormEvent) => {
     e.preventDefault();
-    console.log('formData', formData);
+    try {
+      const data = await passwordResetApi.checkEmailRequest(formData as IReqData);
+      if (data?.success) {
+        navigate(ROUTES.RESET_PASSWORD);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }, [formData]);
 
   return (
@@ -40,7 +49,7 @@ export default function ForgotPasswordPage() {
         <EmailInput
           placeholder={'Укажите e-mail'}
           onChange={handleSetValue}
-          value={formData.email}
+          value={formData.email as string}
           name={'email'}
         />
       </MainForm>

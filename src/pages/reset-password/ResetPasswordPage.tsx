@@ -1,17 +1,19 @@
 import React, { useState, useCallback, FormEvent } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/constants';
 import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { MainForm } from '../../components';
 import style from './ResetPassword.module.scss';
+import passwordResetApi, { IReqData } from '../../utils/api/PasswordResetApi';
 
 interface IResetForm {
   password: '',
-  code: '',
+  token: '',
 }
 
 export default function ResetPasswordPage() {
-  const [formData, setFormData] = useState<IResetForm>({ password: '', code: '' });
+  const [formData, setFormData] = useState<IResetForm | IReqData>({ password: '', token: '' });
+  const navigate = useNavigate();
 
   const handleSetValue = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
@@ -28,7 +30,14 @@ export default function ResetPasswordPage() {
 
   const handleSubmit = useCallback(async (e: FormEvent) => {
     e.preventDefault();
-    console.log('formData', formData);
+    try {
+      const data = await passwordResetApi.resetPasswordRequest(formData as IReqData);
+      if (data?.success) {
+        navigate(ROUTES.LOGIN);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }, [formData]);
 
   return (
@@ -41,15 +50,15 @@ export default function ResetPasswordPage() {
         <PasswordInput
           placeholder={'Введите новый пароль'}
           onChange={handleSetValue}
-          value={formData.password}
+          value={formData.password as string}
           name={'password'}
         />
         <Input
           type="text"
           placeholder="Введите код из письма"
           onChange={handleSetValue}
-          value={formData.code}
-          name="code"
+          value={formData.token as string}
+          name="token"
           onPointerEnterCapture={undefined}
           onPointerLeaveCapture={undefined}
         />
