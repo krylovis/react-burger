@@ -2,6 +2,7 @@ export enum METHODS {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
+  PATCH = 'PATCH',
   DELETE = 'DELETE',
 }
 
@@ -68,6 +69,10 @@ export class BaseApi {
 
   public put(path: string, data: RequestInit) {
     return this._request({ path, options: { method: METHODS.PUT, ...data } });
+  }
+
+  public patch(path: string, data: RequestInit) {
+    return this._request({ path, options: { method: METHODS.PATCH, ...data } });
   }
 
   public delete(path: string, data: RequestInit) {

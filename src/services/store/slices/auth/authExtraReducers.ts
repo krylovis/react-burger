@@ -70,6 +70,24 @@ export const fetchUser = createAsyncThunk('auth/getUser',
     }
   });
 
+export const fetchUpdateUser = createAsyncThunk('auth/updateUser',
+  async (data: IReqData, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await authApi.updateUserRequest(data);
+      dispatch(setUser(response.user));
+      return response;
+    } catch (error) {
+      if ((error as Error).message === 'jwt expired') {
+        await dispatch(refreshToken());
+        dispatch(fetchUser());
+      }
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('Произошла неизвестная ошибка');
+    }
+  });
+
   export const fetchLogout = createAsyncThunk('auth/logout',
   async (_, { rejectWithValue, dispatch }) => {
     try {
