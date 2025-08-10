@@ -7,6 +7,7 @@ export const ROUTES = {
   REGISTER: '/register',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
-  INGREDIENTS: '/ingredients/:id',
+  INGREDIENTS: '/ingredients',
+  INGREDIENT_ID: '/ingredients/:id',
   NOT_FOUND: '*',
 }

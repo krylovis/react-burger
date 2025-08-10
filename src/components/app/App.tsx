@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import style from './App.module.scss';
 import {
   MainPage,
@@ -21,6 +21,8 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('constructor');
 
   const dispatch = useAppDispath();
+  const location = useLocation();
+  const state = location.state as { backgroundLocation?: Location };
 
   try {
     dispatch(fetchUser());
@@ -39,12 +41,12 @@ export default function App() {
       <AppHeader activeTab={activeTab} onSetActiveTab={handleSetActiveTab} />
 
       <Container>
-        <Routes>
+        <Routes location={state?.backgroundLocation || location}>
           <Route
             path={ROUTES.PROFILE}
             element={<ProtectedRoute element={() => (<ProfilePage />)} />}
           />
-          <Route path={ROUTES.INGREDIENTS} element={<IngredientPage />} />
+          <Route path={ROUTES.INGREDIENT_ID} element={<IngredientPage />} />
           <Route path={ROUTES.MAIN} element={<MainPage />} />
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
