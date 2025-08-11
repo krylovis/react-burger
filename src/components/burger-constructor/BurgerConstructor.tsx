@@ -1,10 +1,12 @@
 import { useCallback } from "react";
 import { useDrop } from "react-dnd";
+import { useNavigate } from 'react-router-dom';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './BurgerConstructor.module.scss';
 import { DetailsItem, OrderDetails } from '../index';
 import useModalState from '../../hooks/useModalState';
 import { useAppSelector, useAppDispath } from '../../services/store';
+import { selectIsAuth } from '../../services/store/slices/auth/auth.slice';
 import { selectIngredientsObject, TIngredientId } from '../../services/store/slices/ingredients/ingredients.slice';
 import {
   selectOrderIngredients,
@@ -13,16 +15,18 @@ import {
   updateIngredientForOrder,
 } from '../../services/store/slices/constructor/constructor.slice';
 import { fetchMakeOrder } from '../../services/store/slices/constructor/constructorExtraReducers';
+import { ROUTES } from '../../utils/constants';
 
 export default function BurgerConstructor() {
   const { container, orderContainer, list } = style;
 
   const { isModalOpen, toggleModalState, handleCloseModal } = useModalState();
+  const isAuth = useAppSelector(selectIsAuth);
   const ingredients = useAppSelector(selectOrderIngredients);
   const bun = useAppSelector(selectBun);
 
   const ingredientsObject = useAppSelector(selectIngredientsObject);
-
+  const navigate = useNavigate();
 
   const dispatch = useAppDispath();
   const onDropHandler = (itemId: TIngredientId) => {
@@ -39,17 +43,21 @@ export default function BurgerConstructor() {
   let totalPrice = Object.values(ingredients).reduce((sum, { price }) => sum + (price as number), 0);
   if (bun) totalPrice += bun.price;
 
-  const handleMakeOrder = async () => {
-    toggleModalState();
-    const data: { ingredients: string[] } = { ingredients: ingredients.map(({ _id }) => _id) };
-    if (bun) data.ingredients.push(bun._id);
+  const handleMakeOrder = useCallback(async () => {
+    if (isAuth) {
+      toggleModalState();
+      const data: { ingredients: string[] } = { ingredients: ingredients.map(({ _id }) => _id) };
+      if (bun) data.ingredients.push(bun._id);
 
-    try {
-      await dispatch(fetchMakeOrder(data));
-    } catch (e) {
-      console.error(e);
+      try {
+        await dispatch(fetchMakeOrder(data));
+      } catch (e) {
+        console.error(e);
+      }
+    } else {
+      navigate(ROUTES.LOGIN);
     }
-  };
+  }, [isAuth])
 
   const moveDetailsItemHandler = useCallback((dragIndex: number, hoverIndex: number) => {
     const dragCard = ingredients[dragIndex];
