@@ -1,8 +1,10 @@
 import { useState, forwardRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import style from './IngredientsList.module.scss';
 import { IngredientDetails } from '../index';
 import useModalState from '../../hooks/useModalState';
 import { Modal, IngredientItem } from '../index';
+import { ROUTES } from '../../utils/constants';
 
 type TIngredient = Record<string, string | number>;
 interface IProps {
@@ -14,13 +16,21 @@ const BurgerIngredientType = forwardRef<HTMLDivElement, IProps>(({ list, title }
   const [currentItem, setCurrentItem] = useState<TIngredient | null>(null);
   const { isModalOpen, toggleModalState, handleCloseModal } = useModalState();
 
+  const navigate = useNavigate();
+  const location = useLocation()
+
   const handleSelectItem = (item: TIngredient) => {
     setCurrentItem(item);
     toggleModalState();
+
+    navigate(`${ROUTES.INGREDIENTS}/${item._id}`, {
+      state: { backgroundLocation: location },
+    });
   };
 
   const handleCloseItem = () => {
     setCurrentItem(null);
+    navigate('/');
     handleCloseModal();
   };
 

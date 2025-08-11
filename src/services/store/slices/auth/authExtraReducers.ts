@@ -1,0 +1,109 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import authApi, { IReqData } from '../../../../utils/api/AuthApi';
+import { setCookie } from '../../../../utils/cookies';
+import { setUser, logoutUser } from './auth.slice';
+
+export const fetchLogin = createAsyncThunk('auth/login',
+  async (data: IReqData, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await authApi.loginRequest(data);
+
+      dispatch(setUser(response.user));
+      setCookie('accessToken', response.accessToken);
+      setCookie('refreshToken', response.refreshToken);
+      return response;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('Произошла неизвестная ошибка');
+    }
+  });
+
+export const fetchRegister = createAsyncThunk('auth/register',
+  async (data: IReqData, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await authApi.registerRequest(data);
+
+      dispatch(setUser(response.user));
+      setCookie('accessToken', response.accessToken);
+      setCookie('refreshToken', response.refreshToken);
+      return response;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('Произошла неизвестная ошибка');
+    }
+  });
+
+export const refreshToken = createAsyncThunk('auth/refreshToke',
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await authApi.refreshTokenRequest();
+      setCookie('accessToken', response.accessToken);
+      setCookie('refreshToken', response.refreshToken);
+      return response;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('Произошла неизвестная ошибка');
+    }
+  });
+
+export const fetchUser = createAsyncThunk('auth/getUser',
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await authApi.getUserRequest();
+      dispatch(setUser(response.user));
+      return response;
+    } catch (error) {
+      if ((error as Error).message === 'jwt expired') {
+        await dispatch(refreshToken());
+        dispatch(fetchUser());
+      }
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('Произошла неизвестная ошибка');
+    }
+  });
+
+export const fetchUpdateUser = createAsyncThunk('auth/updateUser',
+  async (data: IReqData, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await authApi.updateUserRequest(data);
+      dispatch(setUser(response.user));
+      return response;
+    } catch (error) {
+      if ((error as Error).message === 'jwt expired') {
+        await dispatch(refreshToken());
+        dispatch(fetchUser());
+      }
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('Произошла неизвестная ошибка');
+    }
+  });
+
+  export const fetchLogout = createAsyncThunk('auth/logout',
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await authApi.logoutRequest();
+      dispatch(logoutUser());
+      setCookie('accessToken', '', { expires: -1 });
+      setCookie('refreshToken', '', { expires: -1 });
+      return response;
+    } catch (error) {
+      if ((error as Error).message === 'jwt expired') {
+        await dispatch(refreshToken());
+        dispatch(fetchUser());
+      }
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('Произошла неизвестная ошибка');
+    }
+  });

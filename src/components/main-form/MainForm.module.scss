@@ -1,0 +1,31 @@
+.mainForm {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 480px;
+  margin: 0 auto;
+  align-self: center;
+  align-items: center;
+
+  &_type_profile {
+    align-self: flex-start;
+  }
+
+  &__title {
+    margin: 0;
+    padding-bottom: 24px;
+    font-size: 24px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__btnContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

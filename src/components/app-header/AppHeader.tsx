@@ -1,7 +1,8 @@
 import { Logo, Button, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Link } from 'react-router-dom';
 import style from './AppHeader.module.scss';
 import { Container } from '../index';
-
+import { ROUTES } from '../../utils/constants';
 
 interface IProps {
   activeTab: string;
@@ -36,12 +37,14 @@ export default function AppHeader({ activeTab, onSetActiveTab }: IProps) {
             </Button>
           </nav>
 
-          <Logo className={style.header__logo} />
+          <Link to={ROUTES.MAIN}><Logo className={style.header__logo} /></Link>
 
-          <Button extraClass={style.header__button} htmlType="button" type="secondary" size="medium">
-            <ProfileIcon type="secondary" />
-            Личный кабинет
-          </Button>
+          <Link className={style.header__link} to={ROUTES.PROFILE}>
+            <Button extraClass={style.header__button} htmlType="button" type="secondary" size="medium">
+              <ProfileIcon type="secondary" />
+              Личный кабинет
+            </Button>
+          </Link>
         </ div>
       </Container>
     </header>

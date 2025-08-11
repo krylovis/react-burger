@@ -7,6 +7,8 @@
   &__container {
     display: flex;
     align-items: center;
+    width: 100%;
+    justify-content: space-between;
   }
 
   &__nav {
@@ -23,6 +25,11 @@
     align-items: center;
     gap: 8px;
     padding: 18px 20px;
+    color: #8585AD;
+  }
+
+  &__link {
+    text-decoration: none;
     color: #8585AD;
   }
 }

@@ -2,6 +2,7 @@ export enum METHODS {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
+  PATCH = 'PATCH',
   DELETE = 'DELETE',
 }
 
@@ -41,7 +42,7 @@ export class BaseApi {
     const contentType = res.headers.get('Content-Type');
 
     if (!res.ok) {
-      return Promise.reject(new Error(`Ошибка: ${res.status}`));
+      return res.json().then((error) => Promise.reject(error));
     }
 
     if (contentType?.includes('json')) {
@@ -58,8 +59,8 @@ export class BaseApi {
       .then(this._getResponse);
   }
 
-  public get(path: string) {
-    return this._request({ path, options: { method: METHODS.GET } });
+  public get(path: string, data?: RequestInit) {
+    return this._request({ path, options: { method: METHODS.GET, ...data } });
   }
 
   public post(path: string, data?: RequestInit) {
@@ -68,6 +69,10 @@ export class BaseApi {
 
   public put(path: string, data: RequestInit) {
     return this._request({ path, options: { method: METHODS.PUT, ...data } });
+  }
+
+  public patch(path: string, data: RequestInit) {
+    return this._request({ path, options: { method: METHODS.PATCH, ...data } });
   }
 
   public delete(path: string, data: RequestInit) {

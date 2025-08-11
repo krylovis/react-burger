@@ -6,8 +6,8 @@ interface IProps {
 }
 export default function Container({ children }: IProps) {
   return (
-    <div className={style.container}>
+    <main className={style.container}>
       {children}
-    </div>
+    </main>
   );
 }
