@@ -7,7 +7,6 @@ import { selectUser } from '../../services/store/slices/auth/auth.slice';
 import { ROUTES } from '../../utils/constants';
 import { fetchLogout, fetchUpdateUser } from '../../services/store/slices/auth/authExtraReducers';
 import { IReqData } from '../../utils/api/AuthApi';
-
 import { useNavigate } from 'react-router-dom';
 
 interface IProfileForm {
@@ -129,7 +128,7 @@ export default function ProfilePage() {
         </Button>
       </nav>
 
-      <MainForm type='profile'>
+      <MainForm onSubmit={onSubmit} type='profile'>
         <Input
           ref={nameInputRef}
           disabled={nameDisabled}
@@ -167,8 +166,19 @@ export default function ProfilePage() {
         />
 
         <div className={style.btnContainer}>
-          <Button htmlType='button' type='secondary' onClick={onCancel}>Отмена</Button>
-          <Button htmlType='submit' type='primary' onClick={onSubmit}>Сохранить</Button>
+          <Button
+            htmlType='button'
+            type='secondary'
+            onClick={onCancel}
+          >
+            Отмена
+          </Button>
+          <Button
+            htmlType='submit'
+            type='primary'
+          >
+            Сохранить
+          </Button>
         </div>
       </MainForm>
     </div>

@@ -19,7 +19,11 @@ export default function MainForm({ type, children, formTitle, submitText, onSubm
   return (
     <section className={mainFormClasses}>
       {formTitle && (<h1 className={style.mainForm__title}>{formTitle}</h1>)}
-      <form className={style.mainForm__form} action="action">
+      <form
+        className={style.mainForm__form}
+        onSubmit={onSubmit}
+        action="action"
+      >
         {children}
 
         {submitText && (
@@ -27,7 +31,7 @@ export default function MainForm({ type, children, formTitle, submitText, onSubm
             <Button
               htmlType="submit"
               type="primary"
-              onClick={onSubmit}>
+            >
               {submitText}
             </Button>
           </div>
