@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import authApi, { IReqData } from '../../../../utils/api/AuthApi';
+import authApi from '../../../../utils/api/AuthApi';
+import { IReqData } from '../../../../utils/api/types';
 import { setCookie } from '../../../../utils/cookies';
 import { setUser, logoutUser } from './auth.slice';
 

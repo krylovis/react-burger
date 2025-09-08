@@ -1,14 +1,11 @@
 import { API_URL } from '../constants';
 import { BaseApi } from './BaseApi';
 import { getCookie } from '../cookies';
+import { IReqData } from './types';
 
 const HEADERS = {
   'Content-Type': 'application/json; charset=utf-8',
 };
-
-export interface IReqData {
-  [key: string]: string | number | FormData | string[],
-}
 
 class AuthApi extends BaseApi {
   constructor() {

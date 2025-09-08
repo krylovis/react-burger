@@ -5,10 +5,6 @@ const HEADERS = {
   'Content-Type': 'application/json; charset=utf-8',
 };
 
-export interface IReqData {
-  [key: string]: string | number | FormData,
-}
-
 class IngredientsApi extends BaseApi {
   constructor() {
     super({

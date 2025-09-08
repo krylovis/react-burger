@@ -4,7 +4,7 @@ import { ROUTES } from '../../utils/constants';
 import { EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { MainForm } from '../../components';
 import style from './LoginPage.module.scss';
-import { IReqData } from '../../utils/api/AuthApi';
+import { IReqData } from '../../utils/api/types';
 import { useAppDispath } from '../../services/store';
 import { fetchLogin } from '../../services/store/slices/auth/authExtraReducers';
 import { useNavigate } from 'react-router-dom';
