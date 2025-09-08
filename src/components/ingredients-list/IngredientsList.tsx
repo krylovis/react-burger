@@ -5,8 +5,8 @@ import { IngredientDetails } from '../index';
 import useModalState from '../../hooks/useModalState';
 import { Modal, IngredientItem } from '../index';
 import { ROUTES } from '../../utils/constants';
+import { TIngredient } from '../../services/store/slices/types';
 
-type TIngredient = Record<string, string | number>;
 interface IProps {
   list: TIngredient[],
   title: string,

@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TIngredient } from '../ingredients/ingredients.slice';
 import { fetchUser } from './authExtraReducers';
-
-export interface TOrderIngredient extends TIngredient {
-  key: string;
-}
 
 interface IUser {
   email: string,

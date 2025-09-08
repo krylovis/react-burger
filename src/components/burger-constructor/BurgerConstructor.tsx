@@ -7,7 +7,8 @@ import { DetailsItem, OrderDetails } from '../index';
 import useModalState from '../../hooks/useModalState';
 import { useAppSelector, useAppDispath } from '../../services/store';
 import { selectIsAuth } from '../../services/store/slices/auth/auth.slice';
-import { selectIngredientsObject, TIngredientId } from '../../services/store/slices/ingredients/ingredients.slice';
+import { selectIngredientsObject } from '../../services/store/slices/ingredients/ingredients.slice';
+import { TIngredientId } from '../../services/store/slices/types';
 import {
   selectOrderIngredients,
   selectBun,

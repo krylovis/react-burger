@@ -3,8 +3,7 @@ import { useDrag } from "react-dnd";
 import style from './IngredientItem.module.scss';
 import { useAppSelector } from '../../services/store';
 import { selectOrderIngredients, selectBun } from '../../services/store/slices/constructor/constructor.slice';
-
-type TIngredient = Record<string, string | number>;
+import { TIngredient } from '../../services/store/slices/types';
 interface IProps {
   item: TIngredient,
   itemClick: (item: TIngredient) => void;

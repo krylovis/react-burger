@@ -1,10 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
-import { TIngredient } from '../ingredients/ingredients.slice';
+import { TIngredient, TOrderIngredient } from '../types';
 
-export interface TOrderIngredient extends TIngredient {
-  key: string;
-}
 interface IConstructorState {
   bun: TIngredient | null,
   orderIngredients: TOrderIngredient[],
