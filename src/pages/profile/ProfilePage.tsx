@@ -6,7 +6,7 @@ import { useAppSelector, useAppDispath } from '../../services/store';
 import { selectUser } from '../../services/store/slices/auth/auth.slice';
 import { ROUTES } from '../../utils/constants';
 import { fetchLogout, fetchUpdateUser } from '../../services/store/slices/auth/authExtraReducers';
-import { IReqData } from '../../utils/api/AuthApi';
+import { IReqData } from '../../utils/api/types';
 import { useNavigate } from 'react-router-dom';
 
 interface IProfileForm {

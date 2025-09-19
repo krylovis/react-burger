@@ -4,7 +4,8 @@ import { ROUTES } from '../../utils/constants';
 import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { MainForm } from '../../components';
 import style from './ResetPassword.module.scss';
-import passwordResetApi, { IReqData } from '../../utils/api/PasswordResetApi';
+import passwordResetApi from '../../utils/api/PasswordResetApi';
+import { IReqData } from '../../utils/api/types';
 
 interface IResetForm {
   password: '',

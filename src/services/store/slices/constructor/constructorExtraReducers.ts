@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import ordersApi, { IReqData } from '../../../../utils/api/OrdersApi';
+import ordersApi from '../../../../utils/api/OrdersApi';
+import { IReqData } from '../../../../utils/api/types';
 import { setOrderNumber } from './constructor.slice';
 
 export const fetchMakeOrder = createAsyncThunk('burgerConstructor/fetchMakeOrder',

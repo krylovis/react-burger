@@ -1,22 +1,4 @@
-export enum METHODS {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  PATCH = 'PATCH',
-  DELETE = 'DELETE',
-}
-
-export interface IParams {
-  baseUrl: string,
-  headers: Record<string, string>,
-  endpoint?: string,
-}
-
-export interface IRequest {
-  path: string,
-  options?: RequestInit,
-}
-
+import { METHODS, IParams, IRequest } from './types';
 export class BaseApi {
   _baseUrl: string;
 

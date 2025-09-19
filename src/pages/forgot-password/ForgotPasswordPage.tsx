@@ -3,7 +3,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/constants';
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { MainForm } from '../../components';
-import passwordResetApi, { IReqData } from '../../utils/api/PasswordResetApi';
+import passwordResetApi from '../../utils/api/PasswordResetApi';
+import { IReqData } from '../../utils/api/types';
 import style from './ForgotPassword.module.scss';
 
 interface IForgotPasswordForm {

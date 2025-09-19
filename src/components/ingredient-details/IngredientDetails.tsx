@@ -1,6 +1,5 @@
 import style from './IngredientDetails.module.scss';
-
-type TIngredient = Record<string, string | number>;
+import { TIngredient } from '../../services/store/slices/types';
 
 interface IProps {
   item: TIngredient,
@@ -25,7 +24,7 @@ export default function IngredientDetails({ item }: IProps) {
         {Object.keys(FEATURES).map((key) => (
           <li className={style.feature} key={key}>
             <span>{FEATURES[key]}</span>
-            <span>{item[key]}</span>
+            <span>{item[key as keyof TIngredient]}</span>
           </li>
         ))}
       </ul>

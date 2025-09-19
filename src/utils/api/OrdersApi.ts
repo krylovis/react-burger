@@ -1,13 +1,10 @@
 import { API_URL } from '../constants';
 import { BaseApi } from './BaseApi';
+import { IReqData } from './types';
 
 const HEADERS = {
   'Content-Type': 'application/json; charset=utf-8',
 };
-
-export interface IReqData {
-  [key: string]: string | number | FormData | string[],
-}
 
 class OrdersApi extends BaseApi {
   constructor() {
