@@ -4,6 +4,7 @@ import { Triangle } from 'react-loader-spinner';
 import style from './App.module.scss';
 import {
   MainPage,
+  OrderFeed,
   LoginPage,
   ProfilePage,
   RegisterPage,
@@ -67,6 +68,7 @@ export default function App() {
               />
               <Route path={ROUTES.INGREDIENT_ID} element={<IngredientPage />} />
               <Route path={ROUTES.MAIN} element={<MainPage />} />
+              <Route path={ROUTES.FEED} element={<OrderFeed />} />
               <Route path={ROUTES.LOGIN} element={<LoginPage />} />
               <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
               <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />

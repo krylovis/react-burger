@@ -2,6 +2,7 @@ export const API_URL = 'https://norma.nomoreparties.space/api';
 
 export const ROUTES = {
   MAIN: '/',
+  FEED: '/feed',
   LOGIN: '/login',
   PROFILE: '/profile',
   REGISTER: '/register',
