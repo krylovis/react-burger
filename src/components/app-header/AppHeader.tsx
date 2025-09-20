@@ -16,23 +16,23 @@ export default function AppHeader({ activeTab, onSetActiveTab }: IProps) {
         <div className={style.header__container}>
           <nav className={style.header__nav}>
             <Button
-              extraClass={`${style.header__button}${activeTab === 'constructor' ? ` ${style.activeBtn}` : ''}`}
+              extraClass={`${style.header__button}${activeTab === ROUTES.MAIN ? ` ${style.activeBtn}` : ''}`}
               htmlType="button"
               type="secondary"
               size="medium"
-              onClick={() => onSetActiveTab('constructor')}
+              onClick={() => onSetActiveTab(ROUTES.MAIN)}
             >
-              <BurgerIcon type={activeTab === 'constructor' ? 'primary' : 'secondary'} />
+              <BurgerIcon type={activeTab === ROUTES.MAIN ? 'primary' : 'secondary'} />
               Конструктор
             </Button>
             <Button
-              extraClass={`${style.header__button}${activeTab === 'orders-list' ? ` ${style.activeBtn}` : ''}`}
+              extraClass={`${style.header__button}${activeTab === ROUTES.FEED ? ` ${style.activeBtn}` : ''}`}
               htmlType="button"
               type="secondary"
               size="medium"
-              onClick={() => onSetActiveTab('orders-list')}
+              onClick={() => onSetActiveTab(ROUTES.FEED)}
             >
-              <ListIcon type={activeTab === 'orders-list' ? 'primary' : 'secondary'} />
+              <ListIcon type={activeTab === ROUTES.FEED ? 'primary' : 'secondary'} />
               Лента заказов
             </Button>
           </nav>

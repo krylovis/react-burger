@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Triangle } from 'react-loader-spinner';
 import style from './App.module.scss';
 import {
@@ -21,10 +21,11 @@ import { selectIsUserLoading } from '../../services/store/slices/auth/auth.slice
 import { fetchIngredientsData } from '../../services/store/slices/ingredients/ingredientsExtraReducers';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('constructor');
+  const [activeTab, setActiveTab] = useState(ROUTES.MAIN);
   const isUserLoading = useAppSelector(selectIsUserLoading);
 
   const dispatch = useAppDispath();
+  const navigate = useNavigate();
   const location = useLocation();
   const state = location.state as { backgroundLocation?: Location };
 
@@ -41,9 +42,11 @@ export default function App() {
     }
   }, [dispatch])
 
-  const handleSetActiveTab = (newValues: string) => {
-    if (activeTab === newValues) return;
-    setActiveTab(newValues);
+  const handleSetActiveTab = (selectedTab: string) => {
+    if (activeTab === selectedTab) return;
+
+    setActiveTab(selectedTab);
+    navigate(selectedTab);
   };
 
   return (
