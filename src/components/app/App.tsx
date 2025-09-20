@@ -43,7 +43,9 @@ export default function App() {
   }, [dispatch])
 
   const handleSetActiveTab = (selectedTab: string) => {
-    if (activeTab === selectedTab) return;
+    if ([ROUTES.MAIN, ROUTES.FEED].includes(location.pathname)) {
+      if (activeTab === selectedTab) return;
+    }
 
     setActiveTab(selectedTab);
     navigate(selectedTab);
