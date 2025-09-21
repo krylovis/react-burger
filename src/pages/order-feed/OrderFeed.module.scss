@@ -1,5 +1,23 @@
 .orderFeed {
   display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  padding: 0;
+  height: 100%;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 40px;
+  margin: 0;
+  padding: 40px 0 20px;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
   padding: 0;
   gap: 40px;
   height: 100%;
