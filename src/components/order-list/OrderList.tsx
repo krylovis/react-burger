@@ -10,7 +10,6 @@ interface IProps {
 
 export default function OrderList({ orders }: IProps) {
   const ingredientsObject = useAppSelector(selectIngredientsObject);
-  console.log('ingredientsObject', ingredientsObject);
 
   const handleOrderSelect = (order: TOrder) => {
     console.log('order', order);

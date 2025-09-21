@@ -30,10 +30,10 @@ export default function OrderItem({ order, ingredientsImages, orderClick }: IPro
       <ul className={style.ingredients}>
         {ingredientsImages.map((image, index) => {
           if (index < 5) {
-            return <img src={image as string} alt={`Фото ингредиента: ${{ name }}`} className={style.ingredientImage} />;
+            return <img key={index} src={image as string} alt={`Фото ингредиента: ${{ name }}`} className={style.ingredientImage} />;
           } else if (index === 5) {
             return (
-              <div className={style.lastIngredient}>
+              <div key={index} className={style.lastIngredient}>
                 <img src={image as string} alt={`Фото ингредиента: ${{ name }}`} className={style.ingredientImage} />
                 <span className={style.ingredientsCount}>+{ingredientsCount - 5}</span>
               </div>
