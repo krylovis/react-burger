@@ -21,13 +21,19 @@ import { selectIsUserLoading } from '../../services/store/slices/auth/auth.slice
 import { fetchIngredientsData } from '../../services/store/slices/ingredients/ingredientsExtraReducers';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState(ROUTES.MAIN);
+  const location = useLocation();
+  const state = location.state as { backgroundLocation?: Location };
+
+  let initialTabState = '';
+  if ([ROUTES.MAIN, ROUTES.FEED].includes(location.pathname)) {
+    initialTabState = location.pathname
+  }
+
+  const [activeTab, setActiveTab] = useState(initialTabState);
   const isUserLoading = useAppSelector(selectIsUserLoading);
 
   const dispatch = useAppDispath();
   const navigate = useNavigate();
-  const location = useLocation();
-  const state = location.state as { backgroundLocation?: Location };
 
   useEffect(() => {
     const fetchData = async () => {
