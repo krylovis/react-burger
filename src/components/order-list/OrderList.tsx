@@ -24,11 +24,13 @@ export default function OrderList({ orders }: IProps) {
   return (
     <ul className={style.orderList}>
       {orders.map((order) => {
+        let costOfOrder = 0;
         const ingredientsImages = [];
         if (order.ingredients) {
           for (const item of order.ingredients) {
             if (ingredientsObject[item]) {
               ingredientsImages.push(ingredientsObject[item].image);
+              costOfOrder += ingredientsObject[item].price;
             }
           }
         }
@@ -37,6 +39,7 @@ export default function OrderList({ orders }: IProps) {
           <OrderItem
             key={order._id}
             order={order}
+            costOfOrder={costOfOrder}
             ingredientsImages={ingredientsImages}
             orderClick={handleOrderSelect}
           />
