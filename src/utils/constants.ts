@@ -15,6 +15,6 @@ export const ROUTES = {
 }
 
 export const ORDER_STATUSES: { [key: string]: string } = {
-  created: 'Готовится',
+  pending: 'Готовится',
   done: 'Выполнен'
 }
