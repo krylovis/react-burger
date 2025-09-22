@@ -44,19 +44,16 @@
   overflow: hidden;
 }
 
-.ingredientImage {
+.ingredientContainer {
   position: relative;
-  z-index: 6;
-  width: 64px;
-  height: 64px;
-  aspect-ratio: 1;
-  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 100%;
   border: 2px solid transparent;
   background-image: linear-gradient(var(--modal-bg), var(--modal-bg)),
     radial-gradient(circle, #801AB2, #4C4CFF);
   background-clip: content-box, border-box;
-  border-radius: 100px;
 
   &:not(:first-child) {
     margin-left: -16px;
@@ -67,6 +64,15 @@
       z-index: #{6 - $i};
     }
   }
+}
+
+.ingredientImage {
+  position: relative;
+  z-index: 6;
+  width: 64px;
+  height: 64px;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 
 .lastIngredient {
@@ -87,7 +93,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 6;
+    z-index: 9;
     border-radius: 100%;
     background-color: rgba(0, 0, 0, .5);
   }

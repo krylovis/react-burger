@@ -1,5 +1,6 @@
 import style from './OrderItem.module.scss';
 import { TOrder } from '../../services/store/slices/types';
+import classNames from 'classnames';
 
 interface IProps {
   order: TOrder,
@@ -29,14 +30,19 @@ export default function OrderItem({ order, ingredientsImages, orderClick }: IPro
 
       <ul className={style.ingredients}>
         {ingredientsImages.map((image, index) => {
-          if (index < 5) {
-            return <img key={index} src={image as string} alt={`Фото ингредиента: ${{ name }}`} className={style.ingredientImage} />;
-          } else if (index === 5) {
+          if (index < 6) {
+            const isLastIngredient = (index === 5);
+
             return (
-              <div key={index} className={style.lastIngredient}>
+              <li
+                key={index}
+                className={classNames(style.ingredientContainer, {
+                  [style.lastIngredient]: isLastIngredient,
+                })}
+              >
                 <img src={image as string} alt={`Фото ингредиента: ${{ name }}`} className={style.ingredientImage} />
-                <span className={style.ingredientsCount}>+{ingredientsCount - 5}</span>
-              </div>
+                {isLastIngredient && (<span className={style.ingredientsCount}>+{ingredientsCount - 5}</span>)}
+              </li>
             );
           } else {
             return null;
