@@ -23,13 +23,19 @@
 }
 
 .statusList {
+  max-height: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 8px;
+
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
 .number {
-  font-size: 24px;
+  font-size: 18px;
 
   &.done {
     color: var(--success);
@@ -45,5 +51,6 @@
 .total {}
 
 .count {
-  font-size: 144px;
+  font-size: 110px;
+  text-shadow: 0 4px 32px rgba(51, 51, 255, .5);
 }
