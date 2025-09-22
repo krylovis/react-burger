@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import style from './OrderFeed.module.scss';
-import { OrderList } from '../../components';
+import { OrderList, OrderStatus } from '../../components';
 import { WS_CONNECTION_START } from '../../services/store/middleware/web-socket/types';
 import { useAppDispath, useAppSelector } from '../../services/store';
 import { selectOrdersData } from '../../services/store/slices/orders/orders.slice';
@@ -29,6 +29,7 @@ export default function OrderFeed() {
 
       <div className={style.container}>
         <OrderList orders={ordersData?.orders || []} />
+        <OrderStatus />
       </div>
     </div>
   );

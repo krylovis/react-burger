@@ -1,0 +1,49 @@
+.orderStatus {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.statusContainer {
+  display: flex;
+  gap: 36px;
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.subtitle {
+  font-size: 24px;
+  margin: 0;
+}
+
+.statusList {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.number {
+  font-size: 24px;
+
+  &.done {
+    color: var(--success);
+  }
+}
+
+.totalContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.total {}
+
+.count {
+  font-size: 144px;
+}
