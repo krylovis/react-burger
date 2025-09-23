@@ -5,6 +5,7 @@ import style from './App.module.scss';
 import {
   MainPage,
   OrderFeed,
+  OrderPage,
   LoginPage,
   ProfilePage,
   RegisterPage,
@@ -80,6 +81,7 @@ export default function App() {
                 element={<ProtectedRoute element={() => (<ProfilePage />)} />}
               />
               <Route path={ROUTES.INGREDIENT_ID} element={<IngredientPage />} />
+              <Route path={ROUTES.FEED_ID} element={<OrderPage />} />
               <Route path={ROUTES.MAIN} element={<MainPage />} />
               <Route path={ROUTES.FEED} element={<OrderFeed />} />
               <Route path={ROUTES.LOGIN} element={<LoginPage />} />

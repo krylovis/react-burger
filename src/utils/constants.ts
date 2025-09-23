@@ -4,6 +4,7 @@ export const WS_ORDERS_URL = 'wss://norma.nomoreparties.space/orders/all';
 export const ROUTES = {
   MAIN: '/',
   FEED: '/feed',
+  FEED_ID: '/feed/:id',
   LOGIN: '/login',
   PROFILE: '/profile',
   REGISTER: '/register',
