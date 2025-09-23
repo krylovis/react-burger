@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { TAllOrders } from '../types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { TOrderId, TAllOrders, TOrder } from '../types';
 
 interface IOrdersState {
   data: TAllOrders,
+  ordersObject: Record<TOrderId, TOrder>,
   isConnected: boolean;
   error: string | null;
 };
@@ -14,6 +15,7 @@ const initialState: IOrdersState = {
     total: 0,
     totalToday: 0
   },
+  ordersObject: {},
   isConnected: false,
   error: null,
 };
@@ -22,12 +24,23 @@ const ordersSlice = createSlice({
   name: 'orders',
   initialState,
   reducers: {
-    setOrders: (state, action) => {
-      state.data = action.payload;
+    setOrders: (state, action: PayloadAction<{ data: TAllOrders }>) => {
+      const { data } = action.payload;
+
+      state.data = data;
+      state.ordersObject = data.orders
+        .reduce((acc: Record<TOrderId, TOrder>, item) => {
+          acc[item._id] = item;
+          return acc;
+        }, {});
     },
   },
   selectors: {
     selectOrders: (state) => state.data.orders,
+    selectOrdersObject: (state) => state.ordersObject,
+    selectOrderById: (state, id) => {
+      return state.ordersObject[id] || null;
+    },
     selectStatusDoneOrders: (state) => state.data.orders
       .map(({ status, number }) => (status === 'done') && number).filter((item) => item) as number[],
     selectStatusPendingOrders: (state) => state.data.orders
@@ -42,6 +55,8 @@ export const { setOrders } = ordersSlice.actions;
 
 export const {
   selectOrders,
+  selectOrdersObject,
+  selectOrderById,
   selectTotal,
   selectTotalToday,
   selectStatusDoneOrders,

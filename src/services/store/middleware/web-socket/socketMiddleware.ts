@@ -32,7 +32,7 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
 
         socket.onmessage = ({ data }) => {
           const parsedData = JSON.parse(data);
-          dispatch(setOrders(parsedData));
+          dispatch(setOrders({ data: parsedData }));
         };
 
         socket.onclose = ({ code }) => {
