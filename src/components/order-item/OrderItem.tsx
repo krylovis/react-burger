@@ -1,4 +1,3 @@
-
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './OrderItem.module.scss';
 import { TOrder } from '../../services/store/slices/types';
