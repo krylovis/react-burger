@@ -38,7 +38,23 @@ export default function OrderInfo({ order }: IProps) {
         <span className={style.listTitle}>Состав:</span>
 
         <ul className={style.ingredients}>
-          {ingredients.map((id, index) => (<li key={index}>{id}</li>))}
+          {ingredients.map((id, index) => {
+            const { image, name, price, type } = ingredientsObject[id];
+
+            return (
+              <li key={index} className={style.ingredientContainer}>
+                <div className={style.imageContainer}>
+                  <img src={image as string} alt={`Фото ингредиента: ${{ name }}`} className={style.ingredientImage} />
+                </div>
+
+                <p className={style.name}>{name}</p>
+
+                <div className={style.cost}>
+                  <span>{type === 'bun' ? 2 : 1} x {price}</span>
+                  <CurrencyIcon type="primary" />
+                </div>
+              </li>)
+          })}
         </ul>
       </div>
 
