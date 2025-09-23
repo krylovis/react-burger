@@ -3,6 +3,8 @@ import { useAppSelector } from '../../services/store';
 import { selectIngredientsObject } from '../../services/store/slices/ingredients/ingredients.slice';
 import { TOrder } from '../../services/store/slices/types';
 import { OrderItem } from '../index';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { ROUTES } from '../../utils/constants';
 
 interface IProps {
   orders: TOrder[],
@@ -11,14 +13,16 @@ interface IProps {
 export default function OrderList({ orders }: IProps) {
   const ingredientsObject = useAppSelector(selectIngredientsObject);
 
+  const navigate = useNavigate();
+  const location = useLocation()
+
   const handleOrderSelect = (order: TOrder) => {
-    console.log('order', order);
     // setCurrentItem(item);
     // toggleModalState();
 
-    // navigate(`${ROUTES.INGREDIENTS}/${item._id}`, {
-    //   state: { backgroundLocation: location },
-    // });
+    navigate(`${ROUTES.FEED}/${order._id}`, {
+      state: { backgroundLocation: location },
+    });
   };
 
   return (
