@@ -20,7 +20,6 @@ import { useAppDispath, useAppSelector } from '../../services/store';
 import { fetchUser } from '../../services/store/slices/auth/authExtraReducers';
 import { selectIsUserLoading } from '../../services/store/slices/auth/auth.slice';
 import { fetchIngredientsData } from '../../services/store/slices/ingredients/ingredientsExtraReducers';
-import { WS_CONNECTION_START } from '../../services/store/middleware/web-socket/types';
 
 export default function App() {
   const location = useLocation();
@@ -41,7 +40,6 @@ export default function App() {
     const fetchData = async () => {
       await dispatch(fetchUser());
       await dispatch(fetchIngredientsData());
-      await dispatch({ type: WS_CONNECTION_START });
     }
 
     try {

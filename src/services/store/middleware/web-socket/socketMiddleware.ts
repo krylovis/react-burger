@@ -11,15 +11,15 @@ import {
   TWSActions
 } from "./types";
 
-export const socketMiddleware = (wsUrl: string): Middleware => {
+export const socketMiddleware = (): Middleware => {
   return (({ dispatch }: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
 
-    return next => (action: TWSActions) => {
-      const { type } = action;
+    return next => (action: { type: string, payload: string }) => {
+      const { type, payload } = action;
 
       if (type === WS_CONNECTION_START) {
-        socket = new WebSocket(wsUrl);
+        socket = new WebSocket(payload);
       } else if (type === WS_CONNECTION_CLOSED) {
         socket?.close(1000, WS_CONNECTION_CLOSED)
         socket = null;

@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import style from './OrderFeed.module.scss';
 import { OrderList, OrderStatus } from '../../components';
-import { useAppSelector } from '../../services/store';
+import { useAppDispath, useAppSelector } from '../../services/store';
 import {
   selectOrders,
   selectTotal,
@@ -8,8 +9,24 @@ import {
   selectStatusDoneOrders,
   selectStatusPendingOrders,
 } from '../../services/store/slices/orders/orders.slice';
+import { WS_CONNECTION_START } from '../../services/store/middleware/web-socket/types';
+import { WS_ORDERS_URL } from '../../utils/constants';
 
 export default function OrderFeed() {
+  const dispatch = useAppDispath();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch({ type: WS_CONNECTION_START, payload: WS_ORDERS_URL });
+    }
+
+    try {
+      fetchData();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [dispatch]);
+
   const orders = useAppSelector(selectOrders);
   const total = useAppSelector(selectTotal);
   const totalToday = useAppSelector(selectTotalToday);
