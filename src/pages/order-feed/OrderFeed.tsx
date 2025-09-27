@@ -11,6 +11,7 @@ import {
 } from '../../services/store/slices/orders/orders.slice';
 import { WS_CONNECTION_START } from '../../services/store/middleware/web-socket/types';
 import { WS_ORDERS_URL } from '../../utils/constants';
+import { ROUTES } from '../../utils/constants';
 
 export default function OrderFeed() {
   const dispatch = useAppDispath();
@@ -38,7 +39,7 @@ export default function OrderFeed() {
       <h1 className={style.title}>Лента заказов</h1>
 
       <div className={style.container}>
-        <OrderList orders={orders} />
+        <OrderList route={ROUTES.FEED} orders={orders} />
         <OrderStatus doneList={statusDoneOrders} pendingList={statusPendingOrders} total={total} totalToday={totalToday} />
       </div>
     </div>

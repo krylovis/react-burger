@@ -6,13 +6,13 @@ import { selectIngredientsObject } from '../../services/store/slices/ingredients
 import { TOrder } from '../../services/store/slices/types';
 import { OrderItem, Modal, OrderInfo } from '../index';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ROUTES } from '../../utils/constants';
 
 interface IProps {
+  route: string,
   orders: TOrder[],
 }
 
-export default function OrderList({ orders }: IProps) {
+export default function OrderList({ route, orders }: IProps) {
   const [currentItem, setCurrentItem] = useState<TOrder | null>(null);
   const ingredientsObject = useAppSelector(selectIngredientsObject);
   const { isModalOpen, toggleModalState, handleCloseModal } = useModalState();
@@ -24,14 +24,14 @@ export default function OrderList({ orders }: IProps) {
     setCurrentItem(order);
     toggleModalState();
 
-    navigate(`${ROUTES.FEED}/${order._id}`, {
+    navigate(`${route}/${order._id}`, {
       state: { backgroundLocation: location },
     });
   };
 
   const handleCloseItem = () => {
     setCurrentItem(null);
-    navigate(ROUTES.FEED);
+    navigate(route);
     handleCloseModal();
   };
 
