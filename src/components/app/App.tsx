@@ -86,6 +86,7 @@ export default function App() {
 
               <Route path={ROUTES.INGREDIENT_ID} element={<IngredientPage />} />
               <Route path={ROUTES.FEED_ID} element={<OrderPage />} />
+              <Route path={ROUTES.PROFILE_ORDERS_ID} element={<OrderPage />} />
               <Route path={ROUTES.MAIN} element={<MainPage />} />
               <Route path={ROUTES.FEED} element={<OrderFeed />} />
               <Route path={ROUTES.LOGIN} element={<LoginPage />} />
