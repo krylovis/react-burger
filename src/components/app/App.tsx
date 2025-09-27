@@ -78,8 +78,14 @@ export default function App() {
             <Routes location={state?.backgroundLocation || location}>
               <Route
                 path={ROUTES.PROFILE}
-                element={<ProtectedRoute element={() => (<ProfilePage />)} />}
+                element={<ProtectedRoute element={() => (<ProfilePage tab={'profile'} />)} />}
               />
+
+              <Route
+                path={ROUTES.PROFILE_ORDERS}
+                element={<ProtectedRoute element={() => (<ProfilePage tab={'orders'} />)} />}
+              />
+
               <Route path={ROUTES.INGREDIENT_ID} element={<IngredientPage />} />
               <Route path={ROUTES.FEED_ID} element={<OrderPage />} />
               <Route path={ROUTES.MAIN} element={<MainPage />} />

@@ -7,6 +7,8 @@ export const ROUTES = {
   FEED_ID: '/feed/:id',
   LOGIN: '/login',
   PROFILE: '/profile',
+  PROFILE_ORDERS: '/profile/orders',
+  PROFILE_ORDERS_ID: '/profile/orders/:id',
   REGISTER: '/register',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
