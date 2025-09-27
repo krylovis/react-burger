@@ -5,12 +5,16 @@ import { useAppDispath } from '../../services/store';
 import { ROUTES } from '../../utils/constants';
 import { fetchLogout } from '../../services/store/slices/auth/authExtraReducers';
 import { useNavigate } from 'react-router-dom';
-import { ProfileForm } from '../../components';
+import { ProfileForm, ProfileOrders } from '../../components';
 
-export default function ProfilePage() {
+interface IProps {
+  tab: string;
+}
+
+export default function ProfilePage({ tab }: IProps) {
   const navigate = useNavigate();
   const dispatch = useAppDispath();
-  const [activeTab, setActiveTab] = useState('profile');
+  const [activeTab, setActiveTab] = useState(tab);
 
   const handleLogout = useCallback(async () => {
     setActiveTab('logout')
@@ -25,6 +29,13 @@ export default function ProfilePage() {
     }
   }, []);
 
+  const handleSetActiveTab = (value: string) => {
+    setActiveTab(value);
+
+    if (value === 'profile') navigate(ROUTES.PROFILE);
+    if (value === 'orders') navigate(ROUTES.PROFILE_ORDERS);
+  };
+
   return (
     <div className={style.profilePage}>
       <nav className={style.profilePage__nav}>
@@ -33,16 +44,16 @@ export default function ProfilePage() {
           htmlType="button"
           type="secondary"
           size="medium"
-          onClick={() => setActiveTab('profile')}
+          onClick={() => handleSetActiveTab('profile')}
         >
           Профиль
         </Button>
         <Button
-          extraClass={`${style.profilePage__button}${activeTab === 'orders-history' ? ` ${style.activeBtn}` : ''}`}
+          extraClass={`${style.profilePage__button}${activeTab === 'orders' ? ` ${style.activeBtn}` : ''}`}
           htmlType="button"
           type="secondary"
           size="medium"
-          onClick={() => setActiveTab('orders-history')}
+          onClick={() => handleSetActiveTab('orders')}
         >
           История заказов
         </Button>
@@ -57,7 +68,8 @@ export default function ProfilePage() {
         </Button>
       </nav>
 
-      <ProfileForm />
+      {activeTab === 'profile' && (<ProfileForm />)}
+      {activeTab === 'orders' && (<ProfileOrders />)}
     </div>
   );
 }
