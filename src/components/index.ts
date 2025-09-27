@@ -15,4 +15,5 @@ export { default as DetailsItem } from './details-item/DetailsItem';
 export { default as ModalOverlay } from './modal-overlay/ModalOverlay';
 export { default as Modal } from './modal/Modal';
 export { default as MainForm } from './main-form/MainForm';
+export { default as ProfileForm } from './profile-form/ProfileForm';
 export { default as ProtectedRoute } from './protected-route/ProtectedRoute';
