@@ -10,7 +10,7 @@ import {
   selectStatusPendingOrders,
 } from '../../services/store/slices/orders/orders.slice';
 import { WS_CONNECTION_START } from '../../services/store/middleware/web-socket/types';
-import { WS_ORDERS_URL } from '../../utils/constants';
+import { WS_ALL_ORDERS_URL } from '../../utils/constants';
 import { ROUTES } from '../../utils/constants';
 
 export default function OrderFeed() {
@@ -18,7 +18,7 @@ export default function OrderFeed() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch({ type: WS_CONNECTION_START, payload: WS_ORDERS_URL });
+      await dispatch({ type: WS_CONNECTION_START, payload: WS_ALL_ORDERS_URL });
     }
 
     try {
