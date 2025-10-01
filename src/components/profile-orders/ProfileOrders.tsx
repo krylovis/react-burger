@@ -1,5 +1,5 @@
 import style from './ProfileOrders.module.scss';
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import { useAppDispath, useAppSelector } from '../../services/store';
 import { WS_ORDERS_URL } from '../../utils/constants';
 import { OrderList } from '../../components';
@@ -10,9 +10,9 @@ import {
   selectOrders,
 } from '../../services/store/slices/orders/orders.slice';
 
-export default function ProfileOrders() {
+function ProfileOrders() {
   const dispatch = useAppDispath();
-
+  const orders = useAppSelector(selectOrders);
   useEffect(() => {
     const accessToken = getCookie('accessToken');
     dispatch({ type: WS_CONNECTION_START, payload: `${WS_ORDERS_URL}?token=${accessToken?.replace('Bearer ', '')}` });
@@ -21,9 +21,9 @@ export default function ProfileOrders() {
     };
   }, [dispatch]);
 
-  const orders = useAppSelector(selectOrders);
-
   return (
     <OrderList route={ROUTES.PROFILE_ORDERS} orders={orders} />
   )
 }
+
+export default memo(ProfileOrders);
