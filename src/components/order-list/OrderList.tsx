@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import style from './OrderList.module.scss';
 import useModalState from '../../hooks/useModalState';
 import { useAppSelector } from '../../services/store';
@@ -20,20 +20,20 @@ export default function OrderList({ route, orders }: IProps) {
   const navigate = useNavigate();
   const location = useLocation()
 
-  const handleOrderSelect = (order: TOrder) => {
+  const handleOrderSelect = useCallback(async (order: TOrder) => {
     setCurrentItem(order);
     toggleModalState();
 
     navigate(`${route}/${order._id}`, {
       state: { backgroundLocation: location },
     });
-  };
+  }, []);
 
-  const handleCloseItem = () => {
+  const handleCloseItem = useCallback(async () => {
     setCurrentItem(null);
     navigate(route);
     handleCloseModal();
-  };
+  }, []);
 
   return (
     <>
