@@ -83,15 +83,19 @@ export default function App() {
                 <Route path={ROUTES.PROFILE_ORDERS} element={<ProfileOrders />} />
               </Route>
 
+
               <Route path={ROUTES.PROFILE_ORDERS_ID} element={<OrderPage />} />
-              <Route path={ROUTES.INGREDIENT_ID} element={<IngredientPage />} />
-              <Route path={ROUTES.FEED_ID} element={<OrderPage />} />
               <Route path={ROUTES.MAIN} element={<MainPage />} />
+              <Route path={ROUTES.INGREDIENT_ID} element={<IngredientPage />} />
+
               <Route path={ROUTES.FEED} element={<OrderFeed />} />
+              <Route path={ROUTES.FEED_ID} element={<OrderPage />} />
+
               <Route path={ROUTES.LOGIN} element={<LoginPage />} />
               <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
               <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />
               <Route path={ROUTES.RESET_PASSWORD} element={<ResetPasswordPage />} />
+
               <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
             </Routes>
           </Container>
