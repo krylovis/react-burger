@@ -22,14 +22,14 @@ function ProfilePage() {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [dispatch, navigate]);
 
   const handleSetActiveTab = useCallback(async (value: string) => {
     if (value === location.pathname) return;
 
     setActiveTab(value);
     navigate(value);
-  }, []);
+  }, [location.pathname, navigate]);
 
   return (
     <div className={style.profilePage}>
