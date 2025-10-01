@@ -4,7 +4,7 @@ import { selectIsAuth } from '../../services/store/slices/auth/auth.slice';
 import { useLocation } from 'react-router-dom';
 import { ROUTES } from '../../utils/constants';
 
-export default function ProtectedRoute({ element: Component, anonymous = false, ...props }, ) {
+export default function ProtectedRoute({ element, anonymous = false }, ) {
   const isAuth = useAppSelector(selectIsAuth);
   
   const location = useLocation();
@@ -18,5 +18,5 @@ export default function ProtectedRoute({ element: Component, anonymous = false, 
     return <Navigate to={ROUTES.LOGIN} state={{ from: location}}/>;
   }
 
-  return <Component {...props}/>;
+  return element;
 }

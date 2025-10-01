@@ -77,7 +77,7 @@ export default function App() {
             <Routes location={state?.backgroundLocation || location}>
               <Route
                 path={ROUTES.PROFILE}
-                element={<ProtectedRoute element={() => (<ProfilePage />)} />}
+                element={<ProtectedRoute element={<ProfilePage />} />}
               >
                 <Route index element={<ProfileForm />} />
                 <Route path={ROUTES.PROFILE_ORDERS} element={<ProfileOrders />} />
