@@ -4,17 +4,13 @@ import style from './ProfilePage.module.scss';
 import { useAppDispath } from '../../services/store';
 import { ROUTES } from '../../utils/constants';
 import { fetchLogout } from '../../services/store/slices/auth/authExtraReducers';
-import { useNavigate } from 'react-router-dom';
-import { ProfileForm, ProfileOrders } from '../../components';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 
-interface IProps {
-  tab: string;
-}
-
-export default function ProfilePage({ tab }: IProps) {
+export default function ProfilePage() {
   const navigate = useNavigate();
   const dispatch = useAppDispath();
-  const [activeTab, setActiveTab] = useState(tab);
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState(location.pathname);
 
   const handleLogout = useCallback(async () => {
     setActiveTab('logout')
@@ -30,33 +26,35 @@ export default function ProfilePage({ tab }: IProps) {
   }, []);
 
   const handleSetActiveTab = (value: string) => {
-    setActiveTab(value);
+    if (value === location.pathname) return;
 
-    if (value === 'profile') navigate(ROUTES.PROFILE);
-    if (value === 'orders') navigate(ROUTES.PROFILE_ORDERS);
+    setActiveTab(value);
+    navigate(value);
   };
 
   return (
     <div className={style.profilePage}>
       <nav className={style.profilePage__nav}>
         <Button
-          extraClass={`${style.profilePage__button}${activeTab === 'profile' ? ` ${style.activeBtn}` : ''}`}
+          extraClass={`${style.profilePage__button}${activeTab === ROUTES.PROFILE ? ` ${style.activeBtn}` : ''}`}
           htmlType="button"
           type="secondary"
           size="medium"
-          onClick={() => handleSetActiveTab('profile')}
+          onClick={() => handleSetActiveTab(ROUTES.PROFILE)}
         >
           Профиль
         </Button>
+
         <Button
-          extraClass={`${style.profilePage__button}${activeTab === 'orders' ? ` ${style.activeBtn}` : ''}`}
+          extraClass={`${style.profilePage__button}${activeTab === ROUTES.PROFILE_ORDERS ? ` ${style.activeBtn}` : ''}`}
           htmlType="button"
           type="secondary"
           size="medium"
-          onClick={() => handleSetActiveTab('orders')}
+          onClick={() => handleSetActiveTab(ROUTES.PROFILE_ORDERS)}
         >
           История заказов
         </Button>
+
         <Button
           extraClass={`${style.profilePage__button}${activeTab === 'logout' ? ` ${style.activeBtn}` : ''}`}
           htmlType="button"
@@ -68,8 +66,7 @@ export default function ProfilePage({ tab }: IProps) {
         </Button>
       </nav>
 
-      {activeTab === 'profile' && (<ProfileForm />)}
-      {activeTab === 'orders' && (<ProfileOrders />)}
+      <Outlet />
     </div>
   );
 }

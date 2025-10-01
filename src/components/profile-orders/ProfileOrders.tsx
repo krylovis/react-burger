@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAppDispath, useAppSelector } from '../../services/store';
 import { WS_ORDERS_URL } from '../../utils/constants';
 import { OrderList } from '../../components';
-import { WS_CONNECTION_START } from '../../services/store/middleware/web-socket/types';
+import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from '../../services/store/middleware/web-socket/types';
 import { getCookie } from '../../utils/cookies';
 import { ROUTES } from '../../utils/constants';
 import {
@@ -14,19 +14,11 @@ export default function ProfileOrders() {
   const dispatch = useAppDispath();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const accessToken = getCookie('accessToken');
-      await dispatch({
-        type: WS_CONNECTION_START,
-        payload: `${WS_ORDERS_URL}?token=${accessToken}`
-      });
-    }
-
-    try {
-      fetchData();
-    } catch (error) {
-      console.error(error);
-    }
+    const accessToken = getCookie('accessToken');
+    dispatch({ type: WS_CONNECTION_START, payload: `${WS_ORDERS_URL}?token=${accessToken?.replace('Bearer ', '')}` });
+    return () => {
+      dispatch({ type: WS_CONNECTION_CLOSED });
+    };
   }, [dispatch]);
 
   const orders = useAppSelector(selectOrders);

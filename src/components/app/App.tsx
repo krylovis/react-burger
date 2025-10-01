@@ -15,6 +15,7 @@ import {
   IngredientPage,
 } from '../../pages';
 import { AppHeader, Container, ProtectedRoute } from '../index';
+import { ProfileForm, ProfileOrders } from '../../components';
 import { ROUTES } from '../../utils/constants';
 import { useAppDispath, useAppSelector } from '../../services/store';
 import { fetchUser } from '../../services/store/slices/auth/authExtraReducers';
@@ -76,17 +77,15 @@ export default function App() {
             <Routes location={state?.backgroundLocation || location}>
               <Route
                 path={ROUTES.PROFILE}
-                element={<ProtectedRoute element={() => (<ProfilePage tab={'profile'} />)} />}
-              />
-
-              <Route
-                path={ROUTES.PROFILE_ORDERS}
-                element={<ProtectedRoute element={() => (<ProfilePage tab={'orders'} />)} />}
-              />
+                element={<ProtectedRoute element={() => (<ProfilePage />)} />}
+              >
+                <Route index element={<ProfileForm />} />
+                <Route path={ROUTES.PROFILE_ORDERS} element={<ProfileOrders />} />
+                <Route path={ROUTES.PROFILE_ORDERS_ID} element={<OrderPage />} />
+              </Route>
 
               <Route path={ROUTES.INGREDIENT_ID} element={<IngredientPage />} />
               <Route path={ROUTES.FEED_ID} element={<OrderPage />} />
-              <Route path={ROUTES.PROFILE_ORDERS_ID} element={<OrderPage />} />
               <Route path={ROUTES.MAIN} element={<MainPage />} />
               <Route path={ROUTES.FEED} element={<OrderFeed />} />
               <Route path={ROUTES.LOGIN} element={<LoginPage />} />
