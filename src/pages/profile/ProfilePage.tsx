@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, memo } from 'react';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ProfilePage.module.scss';
 import { useAppDispath } from '../../services/store';
@@ -6,12 +6,11 @@ import { ROUTES } from '../../utils/constants';
 import { fetchLogout } from '../../services/store/slices/auth/authExtraReducers';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 
-export default function ProfilePage() {
+function ProfilePage() {
   const navigate = useNavigate();
   const dispatch = useAppDispath();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState(location.pathname);
-
   const handleLogout = useCallback(async () => {
     setActiveTab('logout')
 
@@ -25,12 +24,12 @@ export default function ProfilePage() {
     }
   }, []);
 
-  const handleSetActiveTab = (value: string) => {
+  const handleSetActiveTab = useCallback(async (value: string) => {
     if (value === location.pathname) return;
 
     setActiveTab(value);
     navigate(value);
-  };
+  }, []);
 
   return (
     <div className={style.profilePage}>
@@ -46,7 +45,7 @@ export default function ProfilePage() {
         </Button>
 
         <Button
-          extraClass={`${style.profilePage__button}${activeTab === ROUTES.PROFILE_ORDERS ? ` ${style.activeBtn}` : ''}`}
+          extraClass={`${style.profilePage__button}${activeTab.includes(ROUTES.PROFILE_ORDERS) ? ` ${style.activeBtn}` : ''}`}
           htmlType="button"
           type="secondary"
           size="medium"
@@ -70,3 +69,5 @@ export default function ProfilePage() {
     </div>
   );
 }
+
+export default memo(ProfilePage);
