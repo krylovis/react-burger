@@ -1,10 +1,11 @@
 import style from './OrderPage.module.scss';
+import { memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { OrderInfo } from '../../components';
 import { useAppSelector } from '../../services/store';
 import { selectOrderById } from '../../services/store/slices/orders/orders.slice';
 
-export default function OrderPage() {
+function OrderPage() {
   const { id } = useParams();
   const order = useAppSelector((state) => selectOrderById(state, id));
 
@@ -14,3 +15,5 @@ export default function OrderPage() {
     </div>
   );
 }
+
+export default memo(OrderPage);
