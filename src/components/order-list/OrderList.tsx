@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, memo } from 'react';
 import style from './OrderList.module.scss';
 import useModalState from '../../hooks/useModalState';
 import { useAppSelector } from '../../services/store';
@@ -8,11 +8,10 @@ import { OrderItem, Modal, OrderInfo } from '../index';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 interface IProps {
-  route: string,
   orders: TOrder[],
 }
 
-export default function OrderList({ route, orders }: IProps) {
+function OrderList({ orders }: IProps) {
   const [currentItem, setCurrentItem] = useState<TOrder | null>(null);
   const ingredientsObject = useAppSelector(selectIngredientsObject);
   const { isModalOpen, toggleModalState, handleCloseModal } = useModalState();
@@ -24,14 +23,14 @@ export default function OrderList({ route, orders }: IProps) {
     setCurrentItem(order);
     toggleModalState();
 
-    navigate(`${route}/${order._id}`, {
+    navigate(order._id, {
       state: { backgroundLocation: location },
     });
   }, []);
 
   const handleCloseItem = useCallback(async () => {
     setCurrentItem(null);
-    navigate(route);
+    navigate(-1);
     handleCloseModal();
   }, []);
 
@@ -70,3 +69,5 @@ export default function OrderList({ route, orders }: IProps) {
     </>
   )
 }
+
+export default memo(OrderList);
