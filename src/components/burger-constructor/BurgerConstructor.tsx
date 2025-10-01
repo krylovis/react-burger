@@ -49,7 +49,6 @@ export default function BurgerConstructor() {
       toggleModalState();
       const data: { ingredients: string[] } = { ingredients: ingredients.map(({ _id }) => _id) };
       if (bun) data.ingredients.push(bun._id);
-
       try {
         await dispatch(fetchMakeOrder(data));
       } catch (e) {
@@ -58,7 +57,7 @@ export default function BurgerConstructor() {
     } else {
       navigate(ROUTES.LOGIN);
     }
-  }, [isAuth])
+  }, [isAuth, ingredients])
 
   const moveDetailsItemHandler = useCallback((dragIndex: number, hoverIndex: number) => {
     const dragCard = ingredients[dragIndex];
