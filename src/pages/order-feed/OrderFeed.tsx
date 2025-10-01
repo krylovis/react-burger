@@ -9,7 +9,7 @@ import {
   selectStatusDoneOrders,
   selectStatusPendingOrders,
 } from '../../services/store/slices/orders/orders.slice';
-import { WS_CONNECTION_START } from '../../services/store/middleware/web-socket/types';
+import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from '../../services/store/middleware/web-socket/types';
 import { WS_ALL_ORDERS_URL } from '../../utils/constants';
 import { ROUTES } from '../../utils/constants';
 
@@ -17,15 +17,10 @@ export default function OrderFeed() {
   const dispatch = useAppDispath();
 
   useEffect(() => {
-    const fetchData = async () => {
-      await dispatch({ type: WS_CONNECTION_START, payload: WS_ALL_ORDERS_URL });
-    }
-
-    try {
-      fetchData();
-    } catch (error) {
-      console.error(error);
-    }
+    dispatch({ type: WS_CONNECTION_START, payload: WS_ALL_ORDERS_URL });
+    return () => {
+      dispatch({ type: WS_CONNECTION_CLOSED });
+    };
   }, [dispatch]);
 
   const orders = useAppSelector(selectOrders);
