@@ -20,9 +20,6 @@ export const socketMiddleware = (): Middleware => {
 
       if (type === WS_CONNECTION_START) {
         socket = new WebSocket(payload);
-      } else if (type === WS_CONNECTION_CLOSED) {
-        socket?.close(1000, WS_CONNECTION_CLOSED)
-        socket = null;
       }
 
       if (socket) {
@@ -42,6 +39,12 @@ export const socketMiddleware = (): Middleware => {
         socket.onerror = (event) => {
           dispatch({ type: WS_CONNECTION_ERROR });
         };
+
+        console.log('type', type);
+        if (type === WS_CONNECTION_CLOSED) {
+          socket.close(1000, WS_CONNECTION_CLOSED);
+          socket = null;
+        }
       }
 
       next(action);
