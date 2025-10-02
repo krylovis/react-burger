@@ -36,6 +36,14 @@
   white-space: nowrap;
 }
 
+.status {
+  font-size: 16px;
+
+  &.done {
+    color: var(--success);
+  }
+}
+
 .footerContainer {
   display: flex;
   justify-content: space-between;

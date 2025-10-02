@@ -2,18 +2,20 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import style from './OrderItem.module.scss';
 import { TOrder } from '../../services/store/slices/types';
 import classNames from 'classnames';
+import { ORDER_STATUSES } from '../../utils/constants';
 
 interface IProps {
   order: TOrder,
   costOfOrder: number,
   ingredientsImages: string[],
+  isOrderPafe?: boolean,
   orderClick: (item: TOrder) => void;
 }
 
 export default function OrderItem({
-  order, ingredientsImages, costOfOrder, orderClick
+  order, ingredientsImages, costOfOrder, isOrderPafe = false, orderClick
 }: IProps) {
-  const { name, number, createdAt } = order;
+  const { name, number, status, createdAt } = order;
 
   const formatter = new Intl.DateTimeFormat('ru-RU', { day: '2-digit', hour: "numeric", minute: "numeric", })
   const formatTime = createdAt ? formatter.format(new Date(createdAt)) : '';
@@ -29,6 +31,10 @@ export default function OrderItem({
         <p className={style.number}>#{number}</p>
         <p className={style.date}>{formatTime}</p>
       </div>
+
+      <span className={classNames(style.status, [style[status]])}>
+        {ORDER_STATUSES[status]}
+      </span>
 
       <p className={style.name}>{name}</p>
 

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './OrderInfo.module.scss';
 import { TOrder } from '../../services/store/slices/types';
@@ -31,7 +32,10 @@ export default function OrderInfo({ order }: IProps) {
 
       <div className={style.header}>
         <h1 className={style.title}>{name}</h1>
-        <span className={style.status}>{ORDER_STATUSES[status]}</span>
+
+        <span className={classNames(style.status, [style[status]])}>
+          {ORDER_STATUSES[status]}
+        </span>
       </div>
 
       <div className={style.content}>
