@@ -80,10 +80,10 @@ export default function App() {
                 element={<ProtectedRoute element={<ProfilePage />} />}
               >
                 <Route index element={<ProfileForm />} />
-                <Route path={ROUTES.PROFILE_ORDERS} element={<ProfileOrders />} />
+                <Route path={ROUTES.PROFILE_ORDERS} element={<ProtectedRoute element={<ProfileOrders />} />} />
               </Route>
 
-              <Route path={ROUTES.PROFILE_ORDERS_ID} element={<OrderPage />} />
+              <Route path={ROUTES.PROFILE_ORDERS_ID} element={<ProtectedRoute element={<OrderPage />} />} />
               <Route path={ROUTES.MAIN} element={<MainPage />} />
               <Route path={ROUTES.INGREDIENT_ID} element={<IngredientPage />} />
 
