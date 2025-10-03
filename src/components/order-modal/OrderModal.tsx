@@ -15,7 +15,7 @@ export default function OrderModal() {
   };
 
   return (
-    <Modal title="Детали ингредиента" closeModal={handleCloseItem}>
+    <Modal closeModal={handleCloseItem}>
       {order && (<OrderInfo order={order} />)}
     </Modal>
   )
