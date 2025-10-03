@@ -15,16 +15,22 @@ import {
   IngredientPage,
 } from '../../pages';
 import { AppHeader, Container, ProtectedRoute } from '../index';
-import { ProfileForm, ProfileOrders } from '../../components';
+import {
+  ProfileForm,
+  ProfileOrders,
+  IngredientModal,
+} from '../../components';
 import { ROUTES } from '../../utils/constants';
 import { useAppDispath, useAppSelector } from '../../services/store';
 import { fetchUser } from '../../services/store/slices/auth/authExtraReducers';
 import { selectIsUserLoading } from '../../services/store/slices/auth/auth.slice';
+import { selectIngredientsLoading } from '../../services/store/slices/ingredients/ingredients.slice';
 import { fetchIngredientsData } from '../../services/store/slices/ingredients/ingredientsExtraReducers';
 
 export default function App() {
   const location = useLocation();
   const state = location.state as { backgroundLocation?: Location };
+  const background = state && state?.backgroundLocation;
 
   let initialTabState = '';
   if ([ROUTES.MAIN, ROUTES.FEED].includes(location.pathname)) {
@@ -33,6 +39,7 @@ export default function App() {
 
   const [activeTab, setActiveTab] = useState(initialTabState);
   const isUserLoading = useAppSelector(selectIsUserLoading);
+  const isIngredientsLoading = useAppSelector(selectIngredientsLoading);
 
   const dispatch = useAppDispath();
   const navigate = useNavigate();
@@ -61,7 +68,7 @@ export default function App() {
 
   return (
     <>
-      {isUserLoading ?
+      {(isUserLoading && isIngredientsLoading) ?
         <Triangle
           visible={true}
           height="260"
@@ -74,7 +81,9 @@ export default function App() {
           <AppHeader activeTab={activeTab} onSetActiveTab={handleSetActiveTab} />
 
           <Container>
-            <Routes location={state?.backgroundLocation || location}>
+            <Routes location={background || location}>
+              <Route path={ROUTES.MAIN} element={<MainPage />} />
+
               <Route
                 path={ROUTES.PROFILE}
                 element={<ProtectedRoute element={<ProfilePage />} />}
@@ -84,7 +93,6 @@ export default function App() {
               </Route>
 
               <Route path={ROUTES.PROFILE_ORDERS_ID} element={<ProtectedRoute element={<OrderPage />} />} />
-              <Route path={ROUTES.MAIN} element={<MainPage />} />
               <Route path={ROUTES.INGREDIENT_ID} element={<IngredientPage />} />
 
               <Route path={ROUTES.FEED} element={<OrderFeed />} />
@@ -98,6 +106,12 @@ export default function App() {
               <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
             </Routes>
           </Container>
+
+          {background && (
+            <Routes>
+              <Route path={ROUTES.INGREDIENT_ID} element={<IngredientModal />} />
+            </Routes>
+          )}
         </div>}
     </>
   );
