@@ -4,11 +4,8 @@ import { setOrders } from "../../slices/orders/orders.slice";
 import {
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_START,
-  WS_SEND_MESSAGE,
-  WS_GET_MESSAGE,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
-  TWSActions
 } from "./types";
 
 export const socketMiddleware = (): Middleware => {
