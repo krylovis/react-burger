@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import style from './OrderFeed.module.scss';
 import { OrderList, OrderStatus } from '../../components';
 import { useAppDispath, useAppSelector } from '../../services/store';
@@ -12,7 +12,7 @@ import {
 import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from '../../services/store/middleware/web-socket/types';
 import { WS_ALL_ORDERS_URL } from '../../utils/constants';
 
-export default function OrderFeed() {
+function OrderFeed() {
   const dispatch = useAppDispath();
 
   useEffect(() => {
@@ -39,3 +39,5 @@ export default function OrderFeed() {
     </div>
   );
 }
+
+export default memo(OrderFeed);

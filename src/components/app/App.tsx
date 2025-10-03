@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Triangle } from 'react-loader-spinner';
 import style from './App.module.scss';
@@ -29,7 +29,7 @@ import { selectIsUserLoading } from '../../services/store/slices/auth/auth.slice
 import { selectIngredientsLoading } from '../../services/store/slices/ingredients/ingredients.slice';
 import { fetchIngredientsData } from '../../services/store/slices/ingredients/ingredientsExtraReducers';
 
-export default function App() {
+function App() {
   const location = useLocation();
   const state = location.state as { backgroundLocation?: Location };
   const background = state && state?.backgroundLocation;
@@ -119,3 +119,5 @@ export default function App() {
     </>
   );
 }
+
+export default memo(App);
