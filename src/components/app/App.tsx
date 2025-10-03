@@ -19,6 +19,7 @@ import {
   ProfileForm,
   ProfileOrders,
   IngredientModal,
+  OrderModal,
 } from '../../components';
 import { ROUTES } from '../../utils/constants';
 import { useAppDispath, useAppSelector } from '../../services/store';
@@ -110,6 +111,7 @@ export default function App() {
           {background && (
             <Routes>
               <Route path={ROUTES.INGREDIENT_ID} element={<IngredientModal />} />
+              <Route path={ROUTES.FEED_ID} element={<OrderModal />} />
             </Routes>
           )}
         </div>}

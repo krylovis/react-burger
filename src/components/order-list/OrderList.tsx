@@ -1,10 +1,9 @@
-import { useState, useCallback, memo } from 'react';
+import { useCallback, memo } from 'react';
 import style from './OrderList.module.scss';
-import useModalState from '../../hooks/useModalState';
 import { useAppSelector } from '../../services/store';
 import { selectIngredientsObject } from '../../services/store/slices/ingredients/ingredients.slice';
 import { TOrder } from '../../services/store/slices/types';
-import { OrderItem, Modal, OrderInfo } from '../index';
+import { OrderItem, } from '../index';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 interface IProps {
@@ -12,26 +11,15 @@ interface IProps {
 }
 
 function OrderList({ orders }: IProps) {
-  const [currentItem, setCurrentItem] = useState<TOrder | null>(null);
   const ingredientsObject = useAppSelector(selectIngredientsObject);
-  const { isModalOpen, toggleModalState, handleCloseModal } = useModalState();
 
   const navigate = useNavigate();
   const location = useLocation()
 
   const handleOrderSelect = useCallback(async (order: TOrder) => {
-    setCurrentItem(order);
-    toggleModalState();
-
     navigate(order._id, {
       state: { backgroundLocation: location },
     });
-  }, []);
-
-  const handleCloseItem = useCallback(async () => {
-    setCurrentItem(null);
-    navigate(-1);
-    handleCloseModal();
   }, []);
 
   return (
@@ -60,12 +48,6 @@ function OrderList({ orders }: IProps) {
           )
         })}
       </ul>
-
-      {(isModalOpen && currentItem) &&
-        <Modal closeModal={handleCloseItem}>
-          <OrderInfo order={currentItem} />
-        </Modal>
-      }
     </>
   )
 }
