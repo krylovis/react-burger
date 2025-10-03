@@ -42,7 +42,6 @@ export default function App() {
   const [activeTab, setActiveTab] = useState(initialTabState);
   const isUserLoading = useAppSelector(selectIsUserLoading);
   const isIngredientsLoading = useAppSelector(selectIngredientsLoading);
-
   const dispatch = useAppDispath();
   const navigate = useNavigate();
 

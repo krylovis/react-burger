@@ -12,7 +12,7 @@ export interface IIngredientsState {
 const initialIngredientsState: IIngredientsState = {
   ingredients: [],
   ingredientsObject: {},
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
