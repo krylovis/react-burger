@@ -1,15 +1,16 @@
 import { Middleware, MiddlewareAPI } from "redux";
 import { RootState, AppDispatch } from "../../index";
 import { setOrders } from "../../slices/orders/orders.slice";
-import {
-  WS_CONNECTION_SUCCESS,
-  WS_CONNECTION_START,
-  WS_CONNECTION_ERROR,
-  WS_CONNECTION_CLOSED,
-} from "./types";
+import WSActions from "./types";
 
 export const socketMiddleware = (): Middleware => {
   return (({ dispatch }: MiddlewareAPI<AppDispatch, RootState>) => {
+    const {
+      WS_CONNECTION_SUCCESS,
+      WS_CONNECTION_START,
+      WS_CONNECTION_ERROR,
+      WS_CONNECTION_CLOSED
+    } = WSActions;
     let socket: WebSocket | null = null;
 
     return next => (action: { type: string, payload: string }) => {

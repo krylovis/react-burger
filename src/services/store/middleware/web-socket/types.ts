@@ -33,3 +33,13 @@ export type TWSActions =
   | IWSConnectionErrorAction
   | IWSConnectionClosedAction
   | IWSGetMessageAction;
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  WS_CONNECTION_SUCCESS,
+  WS_CONNECTION_START,
+  WS_SEND_DATA,
+  WS_GET_DATA,
+  WS_CONNECTION_ERROR,
+  WS_CONNECTION_CLOSED,
+}
