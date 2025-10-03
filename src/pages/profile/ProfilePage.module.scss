@@ -2,6 +2,7 @@
   display: flex;
   gap: 60px;
   padding-top: 120px;
+  width: 100%;
 
   &__nav {
     display: flex;
@@ -18,10 +19,4 @@
   .activeBtn {
     color: white !important;
   }
-}
-
-.btnContainer {
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
 }

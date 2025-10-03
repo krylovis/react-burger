@@ -1,0 +1,56 @@
+.orderStatus {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.statusContainer {
+  display: flex;
+  gap: 36px;
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.subtitle {
+  font-size: 24px;
+  margin: 0;
+}
+
+.statusList {
+  max-height: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 8px;
+
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.number {
+  font-size: 18px;
+
+  &.done {
+    color: var(--success);
+  }
+}
+
+.totalContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.total {}
+
+.count {
+  font-size: 110px;
+  text-shadow: 0 4px 32px rgba(51, 51, 255, .5);
+}

@@ -1,0 +1,117 @@
+.orderInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 640px;
+  gap: 40px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.title{
+  padding: 0;
+  margin: 0;
+  font-size: 24px;
+}
+
+.subtitle{
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-size: 24px;
+}
+
+.status {
+  font-size: 16px;
+
+  &.done {
+    color: var(--success);
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.listTitle {
+  font-size: 24px;
+}
+
+.ingredients {
+  max-height: 300px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding-right: 24px;
+
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: #2F2F37 #8585AD;
+}
+
+.ingredientContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.imageContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  background-image: linear-gradient(var(--modal-bg), var(--modal-bg)),
+    radial-gradient(circle, #801AB2, #4C4CFF);
+  background-clip: content-box, border-box;
+}
+
+.ingredientImage {
+  position: relative;
+  z-index: 6;
+  width: 64px;
+  height: 64px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.name {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date {
+  font-size: 16px;
+  color: var(--secondary-text);
+}
+
+.cost {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 24px;
+}

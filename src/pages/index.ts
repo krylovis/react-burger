@@ -1,4 +1,6 @@
 export { default as MainPage } from './main/MainPage';
+export { default as OrderFeed } from './order-feed/OrderFeed';
+export { default as OrderPage } from './order/OrderPage';
 export { default as ProfilePage } from './profile/ProfilePage';
 export { default as LoginPage } from './login/LoginPage';
 export { default as RegisterPage } from './register/RegisterPage';
