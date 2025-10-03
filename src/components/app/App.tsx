@@ -20,6 +20,7 @@ import {
   ProfileOrders,
   IngredientModal,
   OrderModal,
+  ProfileOrderModal,
 } from '../../components';
 import { ROUTES } from '../../utils/constants';
 import { useAppDispath, useAppSelector } from '../../services/store';
@@ -112,6 +113,7 @@ export default function App() {
             <Routes>
               <Route path={ROUTES.INGREDIENT_ID} element={<IngredientModal />} />
               <Route path={ROUTES.FEED_ID} element={<OrderModal />} />
+              <Route path={ROUTES.PROFILE_ORDERS_ID} element={<ProfileOrderModal />} />
             </Routes>
           )}
         </div>}

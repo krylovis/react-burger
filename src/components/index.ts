@@ -16,6 +16,7 @@ export { default as ModalOverlay } from './modal-overlay/ModalOverlay';
 export { default as Modal } from './modal/Modal';
 export { default as IngredientModal } from './ingredient-modal/IngredientModal';
 export { default as OrderModal } from './order-modal/OrderModal';
+export { default as ProfileOrderModal } from './profile-order-modal/ProfileOrderModal';
 export { default as MainForm } from './main-form/MainForm';
 export { default as ProfileForm } from './profile-form/ProfileForm';
 export { default as ProfileOrders } from './profile-orders/ProfileOrders';
