@@ -44,6 +44,10 @@ const constructorSlice = createSlice({
     },
     resetOrderNumber(state) {
       state.orderNumber = null;
+    },
+    resetIngredientForOrder(state) {
+      state.bun = null;
+      state.orderIngredients = [];
     }
   },
   selectors: {
@@ -59,6 +63,7 @@ export const {
   updateIngredientForOrder,
   setOrderNumber,
   resetOrderNumber,
+  resetIngredientForOrder,
 } = constructorSlice.actions;
 export const {
   selectBun,

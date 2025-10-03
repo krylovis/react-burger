@@ -4,7 +4,7 @@ import style from './OrderDetails.module.scss';
 import { Modal } from '../index';
 import checkGraphics from '../../images/check-graphics.svg';
 import { useAppSelector } from '../../services/store';
-import { selectOrderNumber, resetOrderNumber } from '../../services/store/slices/constructor/constructor.slice';
+import { selectOrderNumber, resetOrderNumber, resetIngredientForOrder } from '../../services/store/slices/constructor/constructor.slice';
 import { useAppDispath } from '../../services/store';
 
 interface IProps {
@@ -22,6 +22,7 @@ export default function OrderDetails({ closeModal }: IProps) {
   const handleCloseModal = () => {
     closeModal();
     dispatch(resetOrderNumber());
+    dispatch(resetIngredientForOrder());
   }
 
   return (
