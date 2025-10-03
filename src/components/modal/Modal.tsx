@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { createPortal } from 'react-dom';
 import { ModalOverlay } from '../index';
-import { ReactNode, SyntheticEvent } from 'react';
+import { useEffect, ReactNode, SyntheticEvent } from 'react';
 import style from './Modal.module.scss';
 
 interface IProps {
@@ -15,6 +15,18 @@ const modalContainer = document.querySelector('#modal')!
 
 export default function Modal({ closeModal, title, children }: IProps) {
   const handleStopPropagation = (e: SyntheticEvent) => e.stopPropagation();
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeModal();
+    };
+
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, []);
 
   const headerClasses = classNames(style.header, {
     [style.header_withoutTitle]: !title,
