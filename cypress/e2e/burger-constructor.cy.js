@@ -63,4 +63,33 @@ describe('Модальное окно с описанием ингредиент
     cy.get(modalCloseBtn).click();
     cy.get(modal).should('not.exist');
   })
-}); 
+});
+
+describe('Оформление заказа', function () {
+  beforeEach(() => { cy.visit(localhost) });
+
+  it('Оформление заказа', function () {
+    cy.get(constructor).as('constructor');
+
+    for (const [key, value] of Object.entries(ingredients)) {
+      cy.get(ingredient).contains(value, { matchCase: false }).as(key);
+      cy.get(`@${key}`).trigger('dragstart');
+
+      cy.get('@constructor').trigger('dragover');
+      cy.get('@constructor').trigger('drop');
+    }
+
+    cy.get('[class^=BurgerConstructor_orderContainer__]').contains('Оформить заказ').as('orderBtm');
+    cy.get('@orderBtm').click();
+
+    if (cy.url().should('include', '/login')) {
+      cy.get('[name=email]').type('kis.226@yandex.ru');
+      cy.get('[name=password]').type('Qwerty@123');
+      cy.contains('button', 'Войти').click();
+
+      cy.get('@orderBtm').click();
+    }
+
+    cy.contains('Ваш заказ начали готовить');
+  });
+});
