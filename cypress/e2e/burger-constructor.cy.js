@@ -1,3 +1,4 @@
+const localhost = 'http://localhost:3000';
 const ingredient = '[class^=IngredientItem_item__]';
 const constructor = '[class^=BurgerConstructor_list__]';
 const modal = '[class^=Modal_modal__]';
@@ -18,9 +19,7 @@ const features = {
 
 // Cypress-тесты для страницы "Конструктор"
 describe('Страница "Конструктор"', function () {
-  beforeEach(() => {
-    cy.visit('http://localhost:3000');
-  });
+  beforeEach(() => { cy.visit(localhost) });
 
   it('Открывается страница "Конструктор"', function () {
     cy.contains('Соберите бургер');
@@ -28,9 +27,7 @@ describe('Страница "Конструктор"', function () {
 });
 
 describe('Перетаскивание ингредиентов', function () {
-  beforeEach(() => {
-    cy.visit('http://localhost:3000');
-  });
+  beforeEach(() => { cy.visit(localhost) });
 
   it('Перетаскивание ингредиентов в конструктор', function () {
     cy.get(constructor).as('constructor');
@@ -46,9 +43,7 @@ describe('Перетаскивание ингредиентов', function () {
 });
 
 describe('Модальное окно с описанием ингредиента', function () {
-  beforeEach(() => {
-    cy.visit('http://localhost:3000');
-  });
+  beforeEach(() => { cy.visit(localhost) });
 
   it('Открытие модального окна с описанием ингредиента', function () {
     cy.get(ingredient).first().as('ingredient');
