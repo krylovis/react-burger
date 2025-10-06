@@ -8,7 +8,7 @@ interface IConstructorState {
   orderNumber: number | null,
 };
 
-const initialConstructorState: IConstructorState = {
+export const initialConstructorState: IConstructorState = {
   bun: null,
   orderIngredients: [],
   orderNumber: null

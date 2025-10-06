@@ -8,7 +8,7 @@ interface IOrdersState {
   error: string | null;
 };
 
-const initialState: IOrdersState = {
+export const initialState: IOrdersState = {
   data: {
     success: false,
     orders: [],
