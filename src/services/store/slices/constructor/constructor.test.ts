@@ -69,7 +69,7 @@ describe('constructor slice test', () => {
   })
 
   it('update ingredient for order', () => {
-    const nextState = constructorReducer(initialState, updateIngredientForOrder({ data: [{...main, key: '1' }, {...main, key: '2' }] }));
+    const nextState = constructorReducer(initialState, updateIngredientForOrder({ data: [{ ...main, key: '1' }, { ...main, key: '2' }] }));
     expect(nextState.orderIngredients).toEqual([...nextState.orderIngredients]);
   })
 
