@@ -1,7 +1,7 @@
 import ingredientsReducer, { initialIngredientsState } from './ingredients.slice';
 
 describe('ingredients slice test', () => {
-  it('Начальное состояние хранилища', () => {
+  it('initial ingredients state', () => {
     expect(ingredientsReducer(undefined, { type: '' })).toEqual(initialIngredientsState);
   });
 });
