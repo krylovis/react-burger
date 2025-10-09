@@ -1,18 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchUser } from './authExtraReducers';
 
-interface IUser {
+export interface IUser {
   email: string,
   name: string
 };
 
-interface IAuthState {
+export interface IAuthState {
   user: IUser | null,
   isAuth: boolean;
   isLoading: boolean;
 };
 
-const initialAuthState: IAuthState = {
+export const initialAuthState: IAuthState = {
   user: null,
   isAuth: false,
   isLoading: true,
